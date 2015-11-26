@@ -1,0 +1,41 @@
+<template name="MasterLayout">
+
+<!-- show this if user signed in, otherwise show only brand and then content goes to signup/login screen -->
+
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<!-- Navigation button when window/screen to small -->
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+       		<span class="sr-only">Toggle navigation</span>
+        	<span class="icon-bar"></span>
+        	<span class="icon-bar"></span>
+       		<span class="icon-bar"></span>
+      	</button>
+      	<!-- Navigation always available despite screen size -->
+      	<span class="navbar-brand">{{#linkTo route="home"}}Popup POS{{/linkTo}}</span>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			{{#if currentUser}}
+			<ul class="nav navbar-nav navbar-left">
+				<li>{{#linkTo route="events"}}Events{{/linkTo}}</li>
+        <li>{{#linkTo route="menu"}}Menu{{/linkTo}}</li>
+        <li>{{#linkTo route="settings"}}Settings{{/linkTo}}</li>
+			</ul>
+			{{/if}}
+			<li class="nav navbar-nav navbar-right">{{> loginButtons}}</li>
+
+			</div>
+		</div>
+	</nav>
+	<div class="container">
+		{{> yield}}
+	</div>
+	<nav class="navbar navbar-default navbar-fixed-bottom">
+  	<div class="container">
+  		<li class="nav navbar-nav navbar-right">Built by DagaHunters</li>
+   	</div>
+	</nav>
+</template>
