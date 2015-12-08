@@ -31,3 +31,16 @@ Router.route('events/:_id', {
 	action: 'edit',
 	where: 'client'
 });
+
+Router.route('/settings', {
+	name: 'settings',
+	controller: 'SettingsController',
+	where: 'client'
+});
+
+Router.route('/settings/addUser', {
+	name: 'addUser',
+	controller: 'SettingsController',
+	action: 'create',
+	where: 'client'
+});
