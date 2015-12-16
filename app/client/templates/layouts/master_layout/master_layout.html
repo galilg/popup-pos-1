@@ -22,7 +22,11 @@
 			<ul class="nav navbar-nav navbar-left">
 				<li>{{#linkTo route="events"}}Events{{/linkTo}}</li>
         <li>{{#linkTo route="menu"}}Menu{{/linkTo}}</li>
-        <li>{{#linkTo route="settings"}}Settings{{/linkTo}}</li>
+        {{#if isManager}}
+        	<li>{{#linkTo route="settings"}}Settings{{/linkTo}}</li>
+        {{/if}}
+      
+        <!--<li>{{#linkTo route="admin"}}Admin{{/linkTo}}</li> -->
 			</ul>
 			{{/if}}
 			<li class="nav navbar-nav navbar-right">{{> loginButtons}}</li>
