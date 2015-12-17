@@ -17,7 +17,9 @@
         		<option value="Manager">Manager</option>
         	</select>
         	</p>
-        <!--<p>Account Name: <input type="text" name="accountName"></p> -->
+        	{{#if ifFirstUser}}
+        <p>Account Name: <input type="text" name="accountName"></p>
+        {{/if}}
         <p><input type="submit" value="Adduser"></p>
 
     </form>

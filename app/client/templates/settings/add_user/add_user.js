@@ -17,6 +17,14 @@ AutoForm.hooks({
 Template.Adduser.helpers({
     'aHelper': function(){
         return "This is a helper";
+    },
+    'ifFirstUser':function(){
+        var currentUserId = Meteor.userId();
+        if(!Meteor.user(currentUserId).profile.businessName){
+            return true;
+        }
+        else
+            return false;
     }
 });
  
@@ -50,7 +58,13 @@ Template.Adduser.events({
         var confirmPassword = $('[name=confirmPassword').val();
         var accountType = $('[name=accountType]').val();
         //var accountName = $('[name=accountName]').val();
-        var accountName = Meteor.user(currentUserId).profile.businessName;
+        if(Meteor.user(currentUserId).profile.businessName){
+            var accountName = Meteor.user(currentUserId).profile.businessName;
+        }
+        else{
+            var accountName = $('[name=accountName]').val();
+
+        }
         console.log("This is the account name:");
         console.log(accountName);
         if(password == confirmPassword){
