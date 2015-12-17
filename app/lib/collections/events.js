@@ -18,9 +18,6 @@ if (Meteor.isServer) {
 
 }
 
-if (Meteor.isClient) {
-  Meteor.subscribe("userData");
-}
 
 Events.attachSchema(new SimpleSchema({
   name: {
@@ -54,5 +51,13 @@ Events.attachSchema(new SimpleSchema({
   createdAt: {
     type: Date,
     autoValue:function(){return new Date()}
+  },
+  createdFromAccount: {
+    type: String,
+    //label: "Account Name",
+    //max: 100,
+    //var user = this.userId;
+    //console.log(user);
+    autoValue:function(){return Meteor.user().profile.businessName}
   }
 }));

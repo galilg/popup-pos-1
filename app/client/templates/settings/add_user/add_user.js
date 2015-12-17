@@ -49,12 +49,20 @@ Template.Adduser.events({
         var password = $('[name=password]').val();
         var confirmPassword = $('[name=confirmPassword').val();
         var accountType = $('[name=accountType]').val();
+        //var accountName = $('[name=accountName]').val();
+        var accountName = Meteor.user(currentUserId).profile.businessName;
+        console.log("This is the account name:");
+        console.log(accountName);
         if(password == confirmPassword){
             Accounts.createUser({
                 email: email,
                 password: password,
-                profile: accountType
+                profile: {
+                    type: accountType,
+                    businessName: accountName
+                }
             });
+
         Router.go('home');
         }
         else
