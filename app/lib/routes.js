@@ -45,4 +45,10 @@ Router.route('/settings/addUser', {
 	where: 'client'
 });
 
+Router.route('/userList',{
+	name: 'userList',
+	controller: 'UserListController',
+	where: 'client'
+});
+
 
