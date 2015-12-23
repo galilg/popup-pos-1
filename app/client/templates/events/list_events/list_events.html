@@ -17,7 +17,9 @@
                 <th>Courses</th>
                 <th>Date</th>
                 <th>Confirmed</th>
+                {{#if isManager}}
                 <th>Edit</th>
+                {{/if}}
     		</tr>
     	</thead>
     	<tbody>
@@ -28,7 +30,9 @@
                 <td>{{courses}}</td>
                 <td>{{date}}</td>
                 <td>{{#if confirmed}}Yes{{else}}No{{/if}}</td>
+                {{#if isManager}}
                 <td>{{#linkTo route='editEvent'}}<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>{{/linkTo}}</td>
+                {{/if}}
             </tr>
             {{/each}}
     	</tbody>

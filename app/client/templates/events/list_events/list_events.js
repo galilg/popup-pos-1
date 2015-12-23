@@ -23,26 +23,16 @@ Template.ListEvents.helpers({
 
 	'isManager':function(){
 		var currentUserId = Meteor.userId();
-		console.log(Meteor.user(currentUserId).profile);
-		if (Meteor.user(currentUserId).profile == "Server"){
+		//console.log(Meteor.user(currentUserId).profile);
+		if (Meteor.user(currentUserId).profile.type == "Server"){
 			return false;
 		}
 		else{
 			return true;
-		}
-	},
-
-	'createdByGalil': function(){
-		var galilUserId = '6hWHLdvo7wHpPH5gE';
-		if (this.createdBy == galilUserId){
-			console.log("It is returning true");
-			return true;
-		}
-		else{
-			console.log("It is returning false");
-			return false;
 		}
 	}
+
+	
 });
 
 /*****************************************************************************/

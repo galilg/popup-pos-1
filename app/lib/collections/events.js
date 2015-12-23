@@ -58,6 +58,8 @@ Events.attachSchema(new SimpleSchema({
     //max: 100,
     //var user = this.userId;
     //console.log(user);
+    
     autoValue:function(){return Meteor.user().profile.businessName}
+
   }
 }));
