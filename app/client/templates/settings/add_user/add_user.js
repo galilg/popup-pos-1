@@ -62,8 +62,8 @@ Template.Adduser.events({
             var accountName = Meteor.user(currentUserId).profile.businessName;
         }
         else{
-            var accountName = $('[name=accountName]').val();
-
+            //var accountName = $('[name=accountName]').val();
+            var accountName = Meteor.user(currentUserId).emails[0].address;
         }
         console.log("This is the account name:");
         console.log(accountName);

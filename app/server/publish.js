@@ -16,3 +16,7 @@ Meteor.publish('userData', function(){
 Meteor.publish('newuser', function () {
   return Newuser.find();
 });
+
+Meteor.publish('userDB', function(){
+	return Meteor.users.find({});
+});
