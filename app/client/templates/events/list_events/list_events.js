@@ -9,14 +9,14 @@ Template.ListEvents.events({
 /*****************************************************************************/
 Template.ListEvents.helpers({
 	events: function() {
-		var galilUserId = 'RzfsYFgAHCrP2iu84';
-		console.log(galilUserId.email);
 		//var theUser = Meteor.users.find({_id: this.userId});
-		var businessType = Meteor.user().profile.businessName;
-		//console.log(businessType);
-		//return Events.find({createdBy: Meteor.userId()}, {sort: {createdAt: -1}});
-		//return Events.find({createdBy: galilUserId}, {sort: {createdAt: -1}});
-		//return Events.find({createdFromAccount: businessType}, {sort: {createdAt: -1}});
+		if (!Meteor.user().profile.businessName){  					// If it is the root user, they don't have a profile.businessName
+			var businessType = Meteor.user().emails[0].address; 	// So in that case the businessType takes their email
+		}															// Which serves as the businessType for all children of the root user
+		else{
+			var businessType = Meteor.user().profile.businessName;	// Otherwise, businessType gets assigned the profile.businessName of the regular child user
+		}
+
 		return Events.find({createdFromAccount: businessType}, {sort: {createdAt: -1}});
 
 	},

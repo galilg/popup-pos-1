@@ -67,6 +67,8 @@ Template.Adduser.events({
         }
         console.log("This is the account name:");
         console.log(accountName);
+        console.log("This is the account type:");
+        console.log(accountType);
         if(password == confirmPassword){
             Accounts.createUser({
                 email: email,

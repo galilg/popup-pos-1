@@ -58,8 +58,18 @@ Events.attachSchema(new SimpleSchema({
     //max: 100,
     //var user = this.userId;
     //console.log(user);
-    
-    autoValue:function(){return Meteor.user().profile.businessName}
+     
+    autoValue:function(){
+      var currentUserId = Meteor.user();
+      if(!Meteor.user(currentUserId).profile.businessName){ //If it is the root user, there is no profile.businessName
+      //autoValue:function()
+      return Meteor.user().emails[0].address; // So in that case use the email, which become everyone;s profile.businessName
+      }
+      else{
+      return Meteor.user().profile.businessName;
+      }
+    }
+  
 
   }
 }));

@@ -20,3 +20,9 @@ Meteor.publish('newuser', function () {
 Meteor.publish('userDB', function(){
 	return Meteor.users.find({});
 });
+
+//Accounts.onCreateUser(function(options, user) {
+ /* if (!user.profile.type)
+  	console.log("THERE IS NO PROFILE");*/
+//  return user;
+//});

@@ -43,11 +43,12 @@ UserListController = RouteController.extend({
   onBeforeAction: function () {
     var currentUser = Meteor.userId();
     if(Meteor.user(currentUser).profile.type == "Server"){
-      console.log("Not authorzied");
+      //console.log("Not authorzied");
       Router.go('home');
     }
-    this.next();
-  
+    else{
+       this.next();
+    }
   },
   
   // The same thing as providing a function as the second parameter. You can
