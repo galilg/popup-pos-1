@@ -21,6 +21,14 @@ Meteor.publish('userDB', function(){
 	return Meteor.users.find({});
 });
 
+
+Meteor.users.deny({
+	update: function(){
+		return true;
+	}
+});
+
+
 //Accounts.onCreateUser(function(options, user) {
  /* if (!user.profile.type)
   	console.log("THERE IS NO PROFILE");*/
