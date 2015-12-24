@@ -23,7 +23,7 @@ Template.UserList.events({
 		if(userId == selectedUser){
 			console.log("This is the guy getting deleted");
 			console.log(selectedUser);
-
+			Meteor.users.remove({_id:selectedUser});
 		}
 	}
 

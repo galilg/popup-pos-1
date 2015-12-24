@@ -28,9 +28,9 @@ Meteor.users.deny({
 	}
 });
 
-
-//Accounts.onCreateUser(function(options, user) {
- /* if (!user.profile.type)
-  	console.log("THERE IS NO PROFILE");*/
-//  return user;
-//});
+Meteor.users.allow({						//allows the remove function to work only if profile.type is Manager
+	remove:function(){
+		if(Meteor.user().profile.type == "Manager")
+			return true;
+	}
+})
