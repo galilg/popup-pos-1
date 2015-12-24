@@ -48,7 +48,25 @@ Router.route('/settings/addUser', {
 Router.route('/userList',{
 	name: 'userList',
 	controller: 'UserListController',
-	where: 'client'
+	where: 'client',
+	authorize: {
+		deny: function(){
+			if (Meteor.user().profile.type == "Server")
+				return true
+			else
+				return false
+
+		}
+	}
 });
 
+
+/*  authorize: {
+    deny: function() {
+      if Meteor.user().admin
+        return  false
+      else
+        return true
+    }
+  },*/
 

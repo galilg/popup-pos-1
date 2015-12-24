@@ -23,6 +23,7 @@ Template.UserList.events({
 		if(userId == selectedUser){
 			console.log("This is the guy getting deleted");
 			console.log(selectedUser);
+
 		}
 	}
 
@@ -53,6 +54,17 @@ Template.UserList.helpers({
 			console.log("This is the guy getting deleted");
 			console.log(selectedUser);
 
+		}
+	},
+
+	'notManager':function(){
+		var currentUserId = Meteor.userId();
+		console.log(Meteor.user(currentUserId).profile);
+		if (Meteor.user(currentUserId).profile.type == "Server"){
+			return true;
+		}
+		else{
+			return false;
 		}
 	},
 

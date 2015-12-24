@@ -41,7 +41,13 @@ UserListController = RouteController.extend({
     this.next();
   },
   onBeforeAction: function () {
+    var currentUser = Meteor.userId();
+    if(Meteor.user(currentUser).profile.type == "Server"){
+      console.log("Not authorzied");
+      Router.go('home');
+    }
     this.next();
+  
   },
   
   // The same thing as providing a function as the second parameter. You can
@@ -53,7 +59,7 @@ UserListController = RouteController.extend({
   //  action: 'myActionFunction'
   
   action: function () {
-    this.render();
+      this.render();
   },
   onAfterAction: function () {
   },
