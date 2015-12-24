@@ -19,12 +19,11 @@
        	</thead>
         <tbody>
           {{#each userDB}}
-          <tr>
+          <tr class = "userAccounts {{selectedClass}}">
             <td>{{emails.[0].address}}</td>
             <td>{{profile.type}}</td>
-            <td>{{#linkTo route='editUser'}}<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>{{/linkTo}}</td>
-           <td><button type="button" class="deleteThisGuy" >Delete</button></td> 
-           
+            <td>{{#linkTo route='editUser'}}<span class="glyphicon glyphicon-edit {{deleteThisGuy}}" aria-hidden="true"></span>{{/linkTo}}</td>
+            <td><span class="glyphicon glyphicon-remove theDeleteButton"></span></td>           
           </tr>  
           {{/each}}
        	</tbody>
