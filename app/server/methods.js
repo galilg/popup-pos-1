@@ -14,7 +14,8 @@ Meteor.methods({
                 password: password,
                 profile: {
                     type: accountType,
-                    businessName: accountName
+                    businessName: accountName,
+                    name: email
                 }
   
  		 })
