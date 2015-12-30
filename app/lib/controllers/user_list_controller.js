@@ -28,8 +28,8 @@ UserListController = RouteController.extend({
         var currentUser = Meteor.userId();
         console.log(currentUser);
         var rootEmail = Meteor.user(currentUser).profile.businessName;
-        return {userDB: Meteor.users.find({"profile.businessName": rootEmail})}
-        //return Meteor.users.find({});
+        return {userDB: Meteor.users.find({"profile.businessName": rootEmail}, {sort: {"emails[0].address":1}})}  //Not sorting correctly.  Name of subcategory must be wrong.
+        //return Meteor.users.find({}); 
   },
   
   // You can provide any of the hook options

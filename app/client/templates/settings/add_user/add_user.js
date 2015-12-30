@@ -70,14 +70,15 @@ Template.Adduser.events({
         console.log("This is the account type:");
         console.log(accountType);
         if(password == confirmPassword){
-            Accounts.createUser({
+            Meteor.call('createNewUser', email, password, accountType, accountName);  //This calls createUser on the server side so that the user is not automatically logged in.
+            /*Accounts.createUser({
                 email: email,
                 password: password,
                 profile: {
                     type: accountType,
                     businessName: accountName
                 }
-            });
+            });*/
 
         Router.go('home');
         }

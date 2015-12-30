@@ -60,6 +60,18 @@ Router.route('/userList',{
 	}
 });
 
+Router.route('settings/editUsers',{
+	name: 'editUsers',
+	where: 'client',
+	authorize: {
+		deny: function(){
+			if (Meteor.user().profile.type == "Server")
+				return true
+			else
+				return false
+		}
+	}
+});
 
 /*  authorize: {
     deny: function() {
