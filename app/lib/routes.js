@@ -60,9 +60,10 @@ Router.route('/userList',{
 	}
 });
 
-Router.route('settings/editUsers',{
-	name: 'editUsers',
+Router.route('settings/editUser',{
+	name: 'EditUser',
 	where: 'client',
+	controller: 'EditUserController',
 	authorize: {
 		deny: function(){
 			if (Meteor.user().profile.type == "Server")
@@ -71,6 +72,12 @@ Router.route('settings/editUsers',{
 				return false
 		}
 	}
+});
+
+Router.route('/setupNewAccount', {
+	name:'setupNewAccount',
+	controller: 'SetupNewAccountController',
+	where:'client'
 });
 
 /*  authorize: {
