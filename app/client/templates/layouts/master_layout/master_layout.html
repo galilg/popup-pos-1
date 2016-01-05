@@ -34,9 +34,12 @@
 			<div><span class="navbar-brand navbar-left">{{#linkTo route="setupNewAccount"}}Create New Account{{/linkTo}}</span>
 			</div>
 			{{/unless}}
-			<li class="nav navbar-nav navbar-right">{{> loginButtons}}</li>
+			<!--<li class="nav navbar-nav navbar-right">{{> loginButtons}}</li>  The default login-->
+			<!--<li class="nav navbar-nav navbar-right">{{>atForm state='signIn'}}</li> -->
+			<li class="nav navbar-nav navbar-right">{{>atNavButton}}</li> 
 
 			</div>
+
 		</div>
 	</nav>
 	<div class="container">

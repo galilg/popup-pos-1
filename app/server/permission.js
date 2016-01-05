@@ -13,3 +13,12 @@ Meteor.users.allow({						//allows the remove function to work only if profile.t
 			return true;
 	}
 });
+
+var myPostLogout = function(){
+	Router.go('/home');
+}
+
+AccountsTemplates.configure({
+	//showAddRemoveServices: false;
+
+});
