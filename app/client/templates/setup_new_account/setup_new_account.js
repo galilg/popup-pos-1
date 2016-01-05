@@ -2,6 +2,27 @@
 /* SetupNewAccount: Event Handlers */
 /*****************************************************************************/
 Template.SetupNewAccount.events({
+	'submit form': function(event){
+		event.preventDefault();
+		var companyName = $('[name=companyName]').val();
+		var email = $('[name=email]').val();
+		var password = $('[name=password]').val();
+		var passwordConfirm = $('[name=passwordConfirm]').val();
+		if(password == passwordConfirm){
+			//Meteor.call('createNewUser', email, password, "Manager", companyName);
+			Accounts.createUser({
+                email: email,
+                password: password,
+                profile: {
+                    type: "Master",
+                    businessName: companyName
+                }
+            })
+			Router.go('newAccountWelcome');
+		}
+		else
+			console.log("Passwords must match.")
+	}
 });
 
 /*****************************************************************************/

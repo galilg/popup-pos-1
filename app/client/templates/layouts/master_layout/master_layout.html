@@ -30,8 +30,10 @@
         <!--<li>{{#linkTo route="admin"}}Admin{{/linkTo}}</li> -->
 			</ul>
 			{{/if}}
-			<div><span class="navbar-brand navbar-center">{{#linkTo route="setupNewAccount"}}Create New Account{{/linkTo}}</span>
+			{{#unless currentUser}}
+			<div><span class="navbar-brand navbar-left">{{#linkTo route="setupNewAccount"}}Create New Account{{/linkTo}}</span>
 			</div>
+			{{/unless}}
 			<li class="nav navbar-nav navbar-right">{{> loginButtons}}</li>
 
 			</div>

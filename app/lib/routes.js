@@ -80,6 +80,19 @@ Router.route('/setupNewAccount', {
 	where:'client'
 });
 
+Router.route('/newAccountWelcome',{
+	name:'newAccountWelcome',
+	where: 'client',
+	authorize: {
+		deny: function(){
+			if (Meteor.user().profile.type == "Master")
+				return false;
+			else
+				return true;
+		}
+	}
+
+});
 /*  authorize: {
     deny: function() {
       if Meteor.user().admin
