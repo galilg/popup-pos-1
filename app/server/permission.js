@@ -9,7 +9,7 @@ Meteor.users.deny({
 
 Meteor.users.allow({						//allows the remove function to work only if profile.type is Manager
 	remove:function(){
-		if(Meteor.user().profile.type == "Manager")
+		if(Meteor.user().profile.type == "Master")
 			return true;
 	}
 });
@@ -18,7 +18,3 @@ var myPostLogout = function(){
 	Router.go('/home');
 }
 
-AccountsTemplates.configure({
-	//showAddRemoveServices: false;
-	hideSignUpLink: true
-});
