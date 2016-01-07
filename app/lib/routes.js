@@ -80,6 +80,12 @@ Router.route('/setupNewAccount', {
 	where:'client'
 });
 
+Router.route('/foodMenu/menu',{
+	name:'menu',
+	controller: 'FoodMenuController',
+	where:'client'
+});
+
 Router.route('/newAccountWelcome',{
 	name:'newAccountWelcome',
 	where: 'client',
