@@ -8,6 +8,11 @@ Template.EditUser.events({
 /* EditUser: Helpers */
 /*****************************************************************************/
 Template.EditUser.helpers({
+	'currentUser': function(){
+		var currentUser = Session.get('editThisUser');
+		console.log(Meteor.user(currentUser).emails[0].address);
+		return Meteor.user(currentUser).emails[0].address;
+	}
 });
 
 /*****************************************************************************/

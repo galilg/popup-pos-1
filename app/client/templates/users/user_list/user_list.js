@@ -2,17 +2,20 @@
 /* UserList: Event Handlers */
 /*****************************************************************************/
 Template.UserList.events({
-	'click .deleteThisGuy': function(){
+	'click .deleteThisGuy': function(e){
 
 		e.preventDefault();
 		console.log("its been hit");
 		console.log(Meteor.user().emails[0].address);
 	},
 
-	'click .userAccounts': function(){
+	'click .userAccounts': function(e){
+		e.preventDefault();
+		var userId = this._id;
 		Session.set('selectedUser', this._id);
 		var selectedUser = Session.get('selectedUser');
-		//console.log(selectedUser);
+		console.log("This is in the .userAccounts:")
+		console.log(Meteor.user(userId).emails[0].address);
 	},
 
 	'click .theDeleteButton': function(e){
@@ -21,7 +24,7 @@ Template.UserList.events({
 		var userId = this._id;
 		var selectedUser = Session.get('selectedUser');
 		if(userId == selectedUser){
-			console.log("This is the guy getting deleted");
+			console.log("This GUY IS GETTING deleted");
 			console.log(selectedUser);
 			Meteor.users.remove({_id:selectedUser});
 		}
@@ -35,25 +38,31 @@ Template.UserList.events({
 /* UserList: Helpers */
 /*****************************************************************************/
 Template.UserList.helpers({
-	'userAccounts': function(){
+	/*'userAccounts': function(){
 		return userDB.find();
-	},
+	},*/
 
 	'selectedClass': function(){
+		//return this._id;
 		var userId = this._id;
 		var selectedUser = Session.get('selectedUser');
-		if(userId == selectedUser){
+		console.log(selectedUser);
+		Session.set('editThisUser', selectedUser);
+		if(userId == selectedUser){	
+			console.log("NOW this is the selectedClass thingy and the user is:");
+			console.log(Meteor.user(userId).emails[0].address);
 			return "selected";
 		}
+
 	}, 
 
 	'deleteThisGuy': function(){
 		var userId = this._id;
 		var selectedUser = Session.get('selectedUser');
 		if(userId == selectedUser){
-			console.log("This is the guy getting deleted");
-			console.log(selectedUser);
-
+			console.log("This keeps pointing to the current user.");
+			console.log(Meteor.user(selectedUser).emails[0].address);
+			return userId;
 		}
 	},
 
