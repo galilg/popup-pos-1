@@ -14,8 +14,14 @@ Template.UserList.events({
 		var userId = this._id;
 		Session.set('selectedUser', this._id);
 		var selectedUser = Session.get('selectedUser');
+		console.log("In the .userAccounts");
+		console.log(selectedUser);
+/*<<<<<<< HEAD:app/client/templates/users/user_list/user_list.js
 		console.log("This is in the .userAccounts:")
 		console.log(Meteor.user(userId).emails[0].address);
+=======
+		
+>>>>>>> theRealOne:app/client/templates/user_list/user_list.js*/
 	},
 
 	'click .theDeleteButton': function(e){
