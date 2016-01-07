@@ -12,7 +12,8 @@ Template.UserList.events({
 	'click .userAccounts': function(){
 		Session.set('selectedUser', this._id);
 		var selectedUser = Session.get('selectedUser');
-		//console.log(selectedUser);
+		console.log("In the .userAccounts");
+		console.log(selectedUser);
 	},
 
 	'click .theDeleteButton': function(e){
