@@ -1,10 +1,21 @@
 <template name="Menu">
   <div class="menu">
-    <ul class="nav nav-pills">
-    	<li role="setupMenu" class="active"><a href="#">Restaurant Menu</a></li>
-    	<li role="setupMenu"><a href="#">Lunch Items</a></li>
-    	<li role="setupMenu"><a href="#">Brunch Items</a></li>
-    	<li role="setupMenu"><a href="#">Dinner Items</a></li>
+    <ul class="nav nav-tabs">
+    	<li role="setupMenu" class="active"><a href="#0" id="restMenu">Restaurant Menu</a></li>
+    	<li role="setupMenu"><a href="#1" id="lunch">Lunch Items</a></li>
+    	<li role="setupMenu"><a href="#2" id="brunch">Brunch Items</a></li>
+    	<li role="setupMenu"><a href="#3" id="dinner">Dinner Items</a></li>
+    	<li role="setupMenu"><a href="#4" id= "bev">Beverages</a></li>
     </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane fade in active" id="0">Content inside tab Restaurant!!!</div>
+        <div class="tab-pane fade" id="1">Content inside tab Lunch</div>
+        <div class="tab-pane fade" id="2">Content inside tab Brunch</div>
+        <div class="tab-pane fade" id="3">Content inside tab Dinner</div>
+        <div class="tab-pane fade" id="4">Content inside tab Bev</div>
+
+    </div>
+ 
   </div>
 </template>
