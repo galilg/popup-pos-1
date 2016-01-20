@@ -51,7 +51,32 @@ Template.Menu.helpers({
 
 		var businessName = Meteor.user().profile.businessName;
 		return Menus.find({createdFromAccount: businessName}, {sort: {course: 1, itemName: 1}});
-	}
+	},
+
+	lunchMenu: function(){
+		var businessName = Meteor.user().profile.businessName;
+		
+		return Menus.find({createdFromAccount: businessName, course: "Lunch"}, {sort: {itemName: 1}});
+	},
+
+	brunchMenu: function(){
+		var businessName = Meteor.user().profile.businessName;
+		
+		return Menus.find({createdFromAccount: businessName, course: "Brunch"}, {sort: {itemName: 1}});
+	},
+
+	dinnerMenu: function(){
+		var businessName = Meteor.user().profile.businessName;
+		
+		return Menus.find({createdFromAccount: businessName, course: "Dinner"}, {sort: {itemName: 1}});
+	},
+
+	beverageMenu: function(){
+		var businessName = Meteor.user().profile.businessName;
+		
+		return Menus.find({createdFromAccount: businessName, course: "Beverage"}, {sort: {itemName: 1}});
+	},
+
 });
 
 /*****************************************************************************/
