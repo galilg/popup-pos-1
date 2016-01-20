@@ -83,7 +83,16 @@ Router.route('/setupNewAccount', {
 Router.route('/foodMenu/menu',{
 	name:'menu',
 	controller: 'FoodMenuController',
+	action: 'list',
 	where:'client'
+});
+
+Router.route('foodMenu/menu/addMenuItem', {
+	name: 'addMenuItem',
+	controller: 'FoodMenuController',
+	action: 'create',
+	where: 'client'
+
 });
 
 Router.route('/newAccountWelcome',{

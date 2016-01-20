@@ -36,7 +36,23 @@ Template.Menu.events({
 /* Menu: Helpers */
 /*****************************************************************************/
 Template.Menu.helpers({
-	
+	'isManager':function(){
+		var currentUserId = Meteor.userId();
+		//console.log(Meteor.user(currentUserId).profile);
+		if (Meteor.user(currentUserId).profile.type == "Server"){
+			return false;
+		}
+		else{
+			return true;
+		}
+	},
+
+	theMenus: function(){
+
+		var businessName = Meteor.user().profile.businessName;
+		return Menus.find({createdFromAccount: businessName}, {sort: {course: 1, itemName: 1}});
+		//return Menus.find();
+	}
 });
 
 /*****************************************************************************/
