@@ -79,6 +79,14 @@ Template.Menu.helpers({
 
 });
 
+AutoForm.hooks({
+	insertMenuForm: {
+		onSuccess: function(doc) {
+			Router.go('menu');
+		}
+	}
+});
+
 /*****************************************************************************/
 /* Menu: Lifecycle Hooks */
 /*****************************************************************************/
