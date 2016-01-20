@@ -50,31 +50,31 @@ Template.Menu.helpers({
 	theMenus: function(){
 
 		var businessName = Meteor.user().profile.businessName;
-		return Menus.find({createdFromAccount: businessName}, {sort: {course: 1, itemName: 1}});
+		return Menus.find({createdFromAccount: businessName}, {sort: {category: 1, course: 1, itemName: 1}});
 	},
 
 	lunchMenu: function(){
 		var businessName = Meteor.user().profile.businessName;
 		
-		return Menus.find({createdFromAccount: businessName, course: "Lunch"}, {sort: {itemName: 1}});
+		return Menus.find({createdFromAccount: businessName, category: "Lunch"}, {sort: {course: 1, itemName: 1}});
 	},
 
 	brunchMenu: function(){
 		var businessName = Meteor.user().profile.businessName;
 		
-		return Menus.find({createdFromAccount: businessName, course: "Brunch"}, {sort: {itemName: 1}});
+		return Menus.find({createdFromAccount: businessName, category: "Brunch"}, {sort: {course: 1, itemName: 1}});
 	},
 
 	dinnerMenu: function(){
 		var businessName = Meteor.user().profile.businessName;
 		
-		return Menus.find({createdFromAccount: businessName, course: "Dinner"}, {sort: {itemName: 1}});
+		return Menus.find({createdFromAccount: businessName, category: "Dinner"}, {sort: {course:1, itemName: 1}});
 	},
 
 	beverageMenu: function(){
 		var businessName = Meteor.user().profile.businessName;
 		
-		return Menus.find({createdFromAccount: businessName, course: "Beverage"}, {sort: {itemName: 1}});
+		return Menus.find({createdFromAccount: businessName, category: "Beverage"}, {sort: {course:1, itemName: 1}});
 	},
 
 });

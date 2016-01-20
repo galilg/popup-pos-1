@@ -35,12 +35,20 @@ Menus.attachSchema(new SimpleSchema({
     min: 0
   },
 
-  course: {
+  category: {
     type: String,
     label: "Category",
     allowedValues: ['Lunch', 'Brunch', 'Dinner', 'Beverage'],
     optional: false
   }, 
+
+  course: {
+    type: String,
+    label: "Course",
+    allowedValues: ['Amuse Bouche', 'Appetizer', 'Main', 'Dessert', 'Side', 'Beverage', 'Other'],
+    optional: false
+  },
+
   createdBy: {
     type: String,
     autoValue:function(){return this.userId},

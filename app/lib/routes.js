@@ -60,7 +60,7 @@ Router.route('/userList',{
 	}
 });
 
-Router.route('settings/editUser',{
+Router.route('settings/editUser/:_id',{
 	name: 'EditUser',
 	where: 'client',
 	controller: 'EditUserController',
