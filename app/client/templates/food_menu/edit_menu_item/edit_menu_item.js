@@ -10,6 +10,13 @@ Template.EditMenuItem.events({
 Template.EditMenuItem.helpers({
 });
 
+AutoForm.hooks({
+	editMenuForm: {
+		onSuccess: function(doc) {
+			Router.go('menu');
+		}
+	}
+});
 /*****************************************************************************/
 /* EditMenuItem: Lifecycle Hooks */
 /*****************************************************************************/
