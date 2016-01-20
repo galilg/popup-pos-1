@@ -25,6 +25,8 @@
     				<th>Items</th>
               	  	<th>Price</th>
                     <th>Course</th>
+                    <th>Edit</th>
+                    <th>Select</th>
               	 </tr> 
 
     	</thead>
@@ -34,6 +36,8 @@
                 <td>{{itemName}}</td>
                 <td>{{price}}</td>
                 <td>{{course}}</td>
+                <td>{{#linkTo route="editMenuItem"}}<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>{{/linkTo}}</td>
+                <td><input type="checkbox" class="theCheckbox" value=""></td>
             </tr>
             {{/each}}
     	</tbody>

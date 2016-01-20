@@ -95,6 +95,13 @@ Router.route('foodMenu/menu/addMenuItem', {
 
 });
 
+Router.route('foodMenu/menu/editMenuItem/:_id',{
+	name: 'editMenuItem',
+	controller: 'FoodMenuController',
+	action: 'edit',
+	where:'client'
+});
+
 Router.route('/newAccountWelcome',{
 	name:'newAccountWelcome',
 	where: 'client',

@@ -16,19 +16,7 @@ if (Meteor.isServer) {
     }
   });
 
-  Menus.deny({
-    insert: function (userId, doc) {
-      return false;
-    },
-
-    update: function (userId, doc, fieldNames, modifier) {
-      return false;
-    },
-
-    remove: function (userId, doc) {
-      return false;
-    }
-  });
+  
 }
 
 Menus.attachSchema(new SimpleSchema({
@@ -41,8 +29,10 @@ Menus.attachSchema(new SimpleSchema({
 
   price: {
     type: Number,
+    decimal: true,
     label: "Price $",
-    max:1000000
+    max: 1000000,
+    min: 0
   },
 
   course: {
@@ -64,6 +54,7 @@ Menus.attachSchema(new SimpleSchema({
     autoValue:function(){
       return Meteor.user().profile.businessName;
     }
-  }
+  },
+
 
   }));

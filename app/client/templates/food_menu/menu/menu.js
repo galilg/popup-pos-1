@@ -51,7 +51,6 @@ Template.Menu.helpers({
 
 		var businessName = Meteor.user().profile.businessName;
 		return Menus.find({createdFromAccount: businessName}, {sort: {course: 1, itemName: 1}});
-		//return Menus.find();
 	}
 });
 

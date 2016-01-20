@@ -61,6 +61,10 @@ FoodMenuController = RouteController.extend({
 
   list: function() {
     this.render('Menu', {});
+  },
+
+  edit: function() {
+    this.render('EditMenuItem', {});
   } 
 
 });
