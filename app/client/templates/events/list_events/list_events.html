@@ -20,6 +20,7 @@
                 {{#if isManager}}
                 <th>Edit</th>
                 {{/if}}
+                <th>Select</th>
     		</tr>
     	</thead>
     	<tbody>
@@ -33,6 +34,7 @@
                 {{#if isManager}}
                 <td>{{#linkTo route='editEvent'}}<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>{{/linkTo}}</td>
                 {{/if}}
+                <td><button type="button" class="btn btn-primary">View Event</button></td>
             </tr>
             {{/each}}
     	</tbody>
