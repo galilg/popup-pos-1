@@ -4,7 +4,6 @@
 Template.ListEvents.events({
 	'click .currentEvent': function(){
 		Session.set('currentEvent', this._id);
-
 	}
 });
 

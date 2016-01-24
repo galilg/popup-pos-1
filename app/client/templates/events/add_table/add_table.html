@@ -1,5 +1,6 @@
 <template name="AddTable">
   <div class="add-table">
-    <h1>Find me in app/client/templates/events/add_table/add_table</h1>
+    <h1>Add New Table</h1>
+    	{{> quickForm collection="Tables" id="insertTableForm" type="insert" omitFields="createdBy, createdAt, createdForEvent" buttonContent="Add"}}
   </div>
 </template>
