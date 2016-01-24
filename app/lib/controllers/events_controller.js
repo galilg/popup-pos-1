@@ -65,5 +65,13 @@ EventsController = RouteController.extend({
 
   edit: function() {
     this.render('EditEvent', {});
-  }
+  },
+
+  view: function() {
+    this.render('ViewEvent', {});
+  },
+
+  addTable: function(){
+    this.render('AddTable', {});
+  }, 
 });

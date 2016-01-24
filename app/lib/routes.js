@@ -115,6 +115,22 @@ Router.route('/newAccountWelcome',{
 	}
 
 });
+
+Router.route('/viewEvent/:_id',{
+	name: 'viewEvent',
+	controller: 'EventsController',
+	action: 'view',
+	where: 'client'
+});
+
+
+Router.route('/createTable/:_id',{
+	name: 'createTable',
+	controller: 'EventsController',
+	action: 'addTable',
+	where: 'client'
+});
+
 /*  authorize: {
     deny: function() {
       if Meteor.user().admin
