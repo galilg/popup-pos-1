@@ -2,6 +2,11 @@
 /* ViewEvent: Event Handlers */
 /*****************************************************************************/
 Template.ViewEvent.events({
+	'click .selectedTable':function(){
+		Session.set('selectedTable', this._id);
+		console.log("This is the selected table");
+		console.log(Session.get('selectedTable'));
+	}
 
 });
 

@@ -75,4 +75,9 @@ EventsController = RouteController.extend({
   addTable: function(){
     this.render('AddTable', {});
   }, 
+
+  editTable:function(){
+    this.render('EditTable', {});
+  },
+  
 });

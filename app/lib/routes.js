@@ -131,6 +131,13 @@ Router.route('/createTable/:_id',{
 	where: 'client'
 });
 
+Router.route('/editTable/:_id',{
+	name: 'editTable',
+	controller: 'EventsController',
+	action: 'editTable',
+	where: 'client'
+});
+
 /*  authorize: {
     deny: function() {
       if Meteor.user().admin
