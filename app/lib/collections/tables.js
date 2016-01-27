@@ -31,8 +31,12 @@ if (Meteor.isServer) {
   });*/
 }
 
-Tables.attachSchema(new SimpleSchema({
 
+//Tables.attachSchema(new SimpleSchema({
+
+Schema = {};
+
+Schema.tables = new SimpleSchema({
   tableName: {
     type: String,
     label: "Table Name",
@@ -59,11 +63,15 @@ Tables.attachSchema(new SimpleSchema({
 
   createdForEvent: {
     type: String,
-    autoValue:function(){
-      //var currentEventId = Session.get('currentEvent');
-      //return currentEventId;
+    label: "Event Id: DO NOT ALTER",
+    /*autoValue:function(){
+      //console.log(Session.get('currentEvent'));
+      var currentEventId = Session.get('currentEvent');
+      return currentEventId;
       //return "Hello!"
-    }
+    }*/
   }
 
-}))
+})
+
+Tables.attachSchema(Schema.tables);
