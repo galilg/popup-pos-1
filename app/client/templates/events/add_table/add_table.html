@@ -4,7 +4,7 @@
     	<!--{{> quickForm collection="Tables" id="insertTableForm" type="insert" omitFields="createdBy, createdAt" buttonContent="Add"}}-->
     </div>
     <div>
-    	{{#autoForm schema=eventFormSchema collection="Tables" id="eventForm" type="insert" omitFields="createdForEvent"}}
+    	{{#autoForm schema=eventFormSchema collection="Tables" id="addTableForm" type="insert" omitFields="createdForEvent"}}
     	<legend>Event</legend>
     	{{> afQuickField name="tableName"}}
     	{{> afQuickField name="guestCount"}}
