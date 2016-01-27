@@ -5,4 +5,22 @@
   	Create New Table
   	</button>
   {{/linkTo}}
+
+  <table class="table table-hover">
+  	<thead>
+  		<tr>
+  			<th>Table Name</th>
+  			<th>Guest Count</th>
+  		</tr>
+  	</thead>
+
+  	<tbody>
+  		{{#each tables}}
+  			<tr>
+  				<td>{{tableName}}</td>
+  				<td>{{guestCount}}</td>
+  			</tr>
+  		{{/each}}
+  	</tbody>
+  	</table>
 </template>
