@@ -4,6 +4,14 @@
 Template.EditTable.events({
 });
 
+AutoForm.hooks({
+	editTableForm: {
+		onSuccess: function(doc)  {
+			var eventId = Session.get('currentEvent');
+			Router.go('viewEvent', {_id:eventId});
+		}
+	}
+});
 /*****************************************************************************/
 /* EditTable: Helpers */
 /*****************************************************************************/
