@@ -8,6 +8,7 @@ EventsController = RouteController.extend({
   subscriptions: function() {
     this.subscribe('events');
     this.subscribe('tables');
+    this.subscribe('menus');
   },
   
   // Subscriptions or other things we want to "wait" on. This also

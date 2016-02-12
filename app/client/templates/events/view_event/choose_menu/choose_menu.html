@@ -8,6 +8,16 @@
    				<th>Course</th>
    			</tr>
    		</thead>
+
+      <tbody>
+        {{#each aMenu}}
+        <tr>
+          <td>{{itemName}}</td>
+          <td>{{price}}</td>
+          <td>{{course}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
    	</table>
 
   </div>
