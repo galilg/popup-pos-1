@@ -10,6 +10,7 @@ EventsController = RouteController.extend({
     this.subscribe('tables');
     this.subscribe('menus');
     this.subscribe('selectedMenuItems');
+    this.subscribe('covers');
   },
   
   // Subscriptions or other things we want to "wait" on. This also
@@ -85,5 +86,9 @@ EventsController = RouteController.extend({
   chooseMenu:function(){
     this.render('ChooseMenu', {});
   },
+
+  viewTable: function(){
+    this.render('ViewTable', {});
+  }
   
 });

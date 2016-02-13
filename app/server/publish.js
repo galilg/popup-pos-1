@@ -47,3 +47,7 @@ Meteor.publish('tables', function () {
 Meteor.publish('selectedMenuItems', function () {
   return SelectedMenuItems.find();
 });
+
+Meteor.publish('covers', function () {
+  return Covers.find();
+});

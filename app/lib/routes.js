@@ -138,6 +138,13 @@ Router.route('/editTable/:_id',{
 	where: 'client'
 });
 
+Router.route('/viewEvent/viewTable/:_id', {
+	name: 'viewTable',
+	controller: 'EventsController',
+	action: 'viewTable',
+	where: 'client'
+})
+
 Router.route('chooseMenu', {
 	name: 'chooseMenu',
 	controller: 'EventsController',
