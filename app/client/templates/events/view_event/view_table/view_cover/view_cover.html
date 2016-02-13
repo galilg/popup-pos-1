@@ -28,7 +28,7 @@
 
     	<tbody>
     		{{#each mains}}
-    			<tr>
+    			<tr class="mainItem {{selectedMain}}">
     				<td>{{itemName}}</td>
     			</tr>
     		{{/each}}
@@ -44,7 +44,7 @@
 
     	<tbody>
     		{{#each desserts}}
-    			<tr>
+    			<tr class="dessertItem {{selectedDessert}}">
     				<td>{{itemName}}</td>
     			</tr>
     		{{/each}}
@@ -60,7 +60,7 @@
 
     	<tbody>
     		{{#each sides}}
-    			<tr>
+    			<tr class="sideItem {{selectedDessert}}">
     				<td>{{itemName}}</td>
     			</tr>
     		{{/each}}

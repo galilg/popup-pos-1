@@ -12,7 +12,29 @@ Template.ViewCover.events({
 		var chosenApp = SelectedMenuItems.findOne({_id:this._id}).itemName;
 		var currentCover = Session.get('currentCover');
 		Covers.update({_id: currentCover}, {$set: {appetizer: chosenApp}});
-	}
+	},
+
+		'click .mainItem': function() {
+		Session.set('selectedMain', this._id);
+		var chosenMain = SelectedMenuItems.findOne({_id:this._id}).itemName;
+		var currentCover = Session.get('currentCover');
+		Covers.update({_id: currentCover}, {$set: {main: chosenMain}});
+	},
+
+		'click .dessertItem': function() {
+		Session.set('selectedDessert', this._id);
+		var chosenDessert = SelectedMenuItems.findOne({_id:this._id}).itemName;
+		var currentCover = Session.get('currentCover');
+		Covers.update({_id: currentCover}, {$set: {dessert: chosenDessert}});
+	},
+
+		'click .sideItem': function() {
+		Session.set('selectedSide', this._id);
+		var chosenSide = SelectedMenuItems.findOne({_id:this._id}).itemName;
+		var currentCover = Session.get('currentCover');
+		Covers.update({_id: currentCover}, {$set: {side: chosenSide}});
+	},
+
 });
 
 /*****************************************************************************/
@@ -58,9 +80,34 @@ Template.ViewCover.helpers({
 		var appId = this._id;
 		var selectedApp = Session.get('selectedApp');
 		if(appId == selectedApp){
-			return "selected";
+			return "colorSelected";
 		}
 	},
+
+	'selectedMain': function() {
+		var mainId = this._id;
+		var selectedMain = Session.get('selectedMain');
+		if(mainId == selectedMain){
+			return 'colorSelected';
+		}
+	},
+
+		'selectedDessert': function() {
+		var dessertId = this._id;
+		var selectedDessert = Session.get('selectedDessert');
+		if(dessertId == selectedDessert){
+			return 'colorSelected';
+		}
+	},
+
+		'selectedSide': function() {
+		var sideId = this._id;
+		var selectedSide = Session.get('selectedSide');
+		if(sideId == selectedSide){
+			return 'colorSelected';
+		}
+	},
+
 });
 
 /*****************************************************************************/
