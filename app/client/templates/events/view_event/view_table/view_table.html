@@ -20,7 +20,7 @@
     	</thead>
     	<tbody>
     		{{#each theCovers}}
-    			<tr>
+    			<tr class="{{isAllergic}}">
     				<td>{{#linkTo route="viewCover"}}<button type="button" class="selectedCover btn btn-primary">Edit</button>{{/linkTo}}</td>
     				<td>{{coverNumber}}</td>
     				<td>{{appetizer}}</td>

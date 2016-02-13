@@ -15,6 +15,7 @@ Template.ViewTable.events({
 
 	'click .selectedCover': function(){
 		var coverId = Session.set('currentCover', this._id);
+		console.log("This is the currentCover", coverId);
 	}
 });
 
@@ -39,7 +40,18 @@ Template.ViewTable.helpers({
 		var tableId = Session.get('selectedTable');
 		console.log("the tableId: ", tableId);
 		return Tables.findOne({_id:tableId}).tableName;
-	}
+	},
+
+	'isAllergic':function(){
+		var thisCoverId = this._id;
+		var allergicId = Session.get('hasAllergyId');
+		console.log("The id of isAllergic", allergicId);
+		console.log('The is of thisCover', thisCoverId);
+		if (thisCoverId == allergicId){
+			return 'allergyHighlight';
+		}
+	},
+
 });
 
 /*****************************************************************************/
@@ -93,6 +105,8 @@ Template.ViewTable.onCreated(function () {
 		}
 		console.log("This is the count the collection has: ", collectionsCount);
 	}
+
+	
 });
 
 Template.ViewTable.onRendered(function () {

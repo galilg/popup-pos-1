@@ -35,6 +35,19 @@ Template.ViewCover.events({
 		Covers.update({_id: currentCover}, {$set: {side: chosenSide}});
 	},
 
+	'change #hasAllergy': function(e){
+		e.preventDefault();
+		var isChecked = e.target.checked;
+		if (isChecked){
+			Session.set('hasAllergy', true);
+/*			Session.set('hasAllergyId', Session.get('currentCover'));
+			console.log(Session.get('hasAllergyId'));*/
+		}
+		else{
+			Session.set('hasAllergy', false);
+			//Session.set('hasAllergyId', "");
+		}
+	}
 });
 
 /*****************************************************************************/
@@ -108,6 +121,11 @@ Template.ViewCover.helpers({
 		}
 	},
 
+	'hasAllergy': function(){
+		if (Session.get('hasAllergy')){
+			return true;
+		}
+	},
 });
 
 /*****************************************************************************/
