@@ -5,6 +5,16 @@ Template.ViewTable.events({
 	'click #back': function(){
 		var eventId = Session.get('currentEvent');
 		Router.go('viewEvent', {_id: eventId});
+	},
+
+	/*Research: will the Session be set for all users?  If two users
+	are accessing different covers will one person's selecting of 
+	a cover affect another user?  I suspect, well, yes.  Or is a session
+	specific to a logged in user?
+	How around this?*/
+
+	'click .selectedCover': function(){
+		var coverId = Session.set('currentCover', this._id);
 	}
 });
 
@@ -47,7 +57,12 @@ Template.ViewTable.onCreated(function () {
 			Covers.insert({
 				table: tableId,
 				event: eventId,
-				coverNumber: (i+1)
+				coverNumber: (i+1),
+				appetizer: "",
+				main: "",
+				dessert: "",
+				allergy: "",
+				notes: ""
 			})
 		}
 	}
@@ -60,7 +75,12 @@ Template.ViewTable.onCreated(function () {
 					Covers.insert({
 						table: tableId,
 						event: eventId,
-						coverNumber: (i + 1)
+						coverNumber: (i + 1),
+						appetizer: "",
+						main: "",
+						dessert: "",
+						allergy: "",
+						notes: ""
 					})
 				}
 			}

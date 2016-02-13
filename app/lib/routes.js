@@ -143,7 +143,14 @@ Router.route('/viewEvent/viewTable/:_id', {
 	controller: 'EventsController',
 	action: 'viewTable',
 	where: 'client'
-})
+});
+
+Router.route('/viewEvent/viewTable/viewCover/:_id',{
+	name: 'viewCover',
+	controller: 'EventsController',
+	action: 'viewCover',
+	where: 'client'
+});
 
 Router.route('chooseMenu', {
 	name: 'chooseMenu',

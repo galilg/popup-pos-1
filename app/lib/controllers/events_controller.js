@@ -89,6 +89,10 @@ EventsController = RouteController.extend({
 
   viewTable: function(){
     this.render('ViewTable', {});
-  }
+  },
+
+  viewCover: function(){
+    this.render('ViewCover', {});
+  },
   
 });
