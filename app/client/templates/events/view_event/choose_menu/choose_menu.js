@@ -3,7 +3,7 @@
 /*****************************************************************************/
 Template.ChooseMenu.events({
 	'change [type=checkbox]': function(e){
-		console.log("You touched the checkbox");
+		// console.log("You touched the checkbox");
 		var itemId = this._id;  // Gets the id of the menu item in the Menus collection
 		var currentEvent = Session.get('currentEvent');  // Gets the event for which this is being chosen
 		var currUser = Meteor.userId();
@@ -22,17 +22,23 @@ Template.ChooseMenu.events({
 		else{
 			if(SelectedMenuItems.findOne({menuItemId:itemId})){
 				var theItemToDeleteId = SelectedMenuItems.findOne({menuItemId:itemId})._id;
-				console.log("This is the id of theItemToDelete: ", theItemToDeleteId);
+				// console.log("This is the id of theItemToDelete: ", theItemToDeleteId);
 				SelectedMenuItems.remove({_id:theItemToDeleteId});
 			}
 		}
 
-		console.log("Is the box checked? ", isChecked);
-		console.log("this is the documentId:", itemId);
-		console.log("This is the account that created it: ", accountCreator);
-		console.log("This is the currentEvent: ", currentEvent);
+		// console.log("Is the box checked? ", isChecked);
+		// console.log("this is the documentId:", itemId);
+		// console.log("This is the account that created it: ", accountCreator);
+		// console.log("This is the currentEvent: ", currentEvent);
 	},
 
+
+	'click #backToEventButton': function(e){
+		e.preventDefault();
+		var eventId = Session.get('currentEvent');
+		Router.go('viewEvent', {_id: eventId});
+	}
 });
 
 /*****************************************************************************/
