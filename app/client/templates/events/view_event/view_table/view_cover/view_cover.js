@@ -59,10 +59,22 @@ Template.ViewCover.events({
 			Session.set('hasAllergy', false);
 			Session.set('hasAllergyId', "");
 			var allergicId = AllergyList.findOne({eventId:currentEvent, allergicGuest: currentCover, createdFromAccount: accountCreator})._id;
+			var coversId = AllergyList.findOne({eventId:currentEvent, allergicGuest: currentCover, createdFromAccount: accountCreator}).allergicGuest;
+			console.log("This is the allergicId: ", allergicId);
+			console.log("THis is the covers id: ", coversId);
+			Covers.update(coversId, {$set: {allergy:""}});  //First update the allergy attribute to blank before deleting from list.
 			AllergyList.remove({
 				_id: allergicId
 			})
 		}
+	},
+
+	'submit form': function(event){
+		event.preventDefault();
+		var allergyDescription = $('[name=theAllergy]').val();
+		var currentCover = Session.get('currentCover');
+		var currentEvent = Session.get('currentEvent');
+		Covers.update(currentCover, {$set:{allergy: allergyDescription}});
 	}
 });
 
@@ -153,6 +165,21 @@ Template.ViewCover.helpers({
 		}
 		else{
 			return false;
+		}
+	},
+
+	'getAllergy':function(){
+		var currUser = Meteor.userId();
+		var accountCreator = Meteor.user(currUser).profile.businessName;
+		var currentCover = Session.get('currentCover');
+		var currentEvent = Session.get('currentEvent');
+		var allergicGuest = AllergyList.findOne({eventId:currentEvent, allergicGuest: currentCover, createdFromAccount: accountCreator}).allergicGuest;
+		console.log("The allergicGuest id: ", allergicGuest);
+		if(allergicGuest){
+			return Covers.findOne({_id: allergicGuest}).allergy;
+		}
+		else{
+			return " ";
 		}
 	}
 });
