@@ -38,14 +38,30 @@ Template.ViewCover.events({
 	'change #hasAllergy': function(e){
 		e.preventDefault();
 		var isChecked = e.target.checked;
+		var currUser = Meteor.userId();
+		var accountCreator = Meteor.user(currUser).profile.businessName;
+		var currentCover = Session.get('currentCover');
+		var currentEvent = Session.get('currentEvent');
 		if (isChecked){
 			Session.set('hasAllergy', true);
-/*			Session.set('hasAllergyId', Session.get('currentCover'));
-			console.log(Session.get('hasAllergyId'));*/
+			Session.set('hasAllergyId', Session.get('currentCover'));
+			console.log(Session.get('hasAllergyId'));
+
+			AllergyList.insert({
+				eventId: currentEvent,
+				allergicGuest: currentCover,
+				createdFromAccount: accountCreator
+			})
+
 		}
+		
 		else{
 			Session.set('hasAllergy', false);
-			//Session.set('hasAllergyId', "");
+			Session.set('hasAllergyId', "");
+			var allergicId = AllergyList.findOne({eventId:currentEvent, allergicGuest: currentCover, createdFromAccount: accountCreator})._id;
+			AllergyList.remove({
+				_id: allergicId
+			})
 		}
 	}
 });
@@ -126,6 +142,19 @@ Template.ViewCover.helpers({
 			return true;
 		}
 	},
+
+	'isChecked': function(){
+		var currUser = Meteor.userId();
+		var accountCreator = Meteor.user(currUser).profile.businessName;
+		var currentCover = Session.get('currentCover');
+		var currentEvent = Session.get('currentEvent');
+		if(AllergyList.findOne({eventId:currentEvent, allergicGuest: currentCover, createdFromAccount: accountCreator})){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
 });
 
 /*****************************************************************************/
