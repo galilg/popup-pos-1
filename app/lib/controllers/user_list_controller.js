@@ -6,6 +6,7 @@ UserListController = RouteController.extend({
   // this.subscribe('item', this.params._id).wait();
   
   subscriptions: function() {
+    this.subscribe('userData');
   },
   
   // Subscriptions or other things we want to "wait" on. This also
@@ -14,6 +15,7 @@ UserListController = RouteController.extend({
   // return Meteor.subscribe('post', this.params._id);
   
   waitOn: function () {
+        return Meteor.subscribe('userDB');
   },
   
   // A data function that can be used to automatically set the data context for
@@ -23,6 +25,11 @@ UserListController = RouteController.extend({
   // return Posts.findOne({_id: this.params._id});
   
   data: function () {
+        var currentUser = Meteor.userId();
+        console.log(currentUser);
+        var rootEmail = Meteor.user(currentUser).profile.businessName;
+        return {userDB: Meteor.users.find({"profile.businessName": rootEmail}, {sort: {"profile.type": 1, "profile.name":1}})}  //Not sorting correctly.  Name of subcategory must be wrong.
+        //return Meteor.users.find({}); 
   },
   
   // You can provide any of the hook options
@@ -34,7 +41,14 @@ UserListController = RouteController.extend({
     this.next();
   },
   onBeforeAction: function () {
-    this.next();
+    var currentUser = Meteor.userId();
+    if(Meteor.user(currentUser).profile.type == "Server"){
+      //console.log("Not authorzied");
+      Router.go('home');
+    }
+    else{
+       this.next();
+    }
   },
   
   // The same thing as providing a function as the second parameter. You can
@@ -46,7 +60,7 @@ UserListController = RouteController.extend({
   //  action: 'myActionFunction'
   
   action: function () {
-    this.render();
+      this.render();
   },
   onAfterAction: function () {
   },

@@ -35,6 +35,7 @@ HomeController = RouteController.extend({
     this.next();
   },
   onBeforeAction: function () {
+  
     this.next();
   },
   

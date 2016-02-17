@@ -2,6 +2,17 @@
 /* ListEvents: Event Handlers */
 /*****************************************************************************/
 Template.ListEvents.events({
+	'click .currentEvent': function(event){
+		//event.preventDefault();
+		//var currentEventId = this._id;
+		//var currentEventName = Events.findOne(currentEventId).name;
+		//console.log(currentEventName);
+		Session.set('currentEvent', this._id);
+		console.log(Session.get('currentEvent'));
+		//var displayIt = Session.get('currentEvent');
+		//console.log("This is gotten from the Session.");
+		//console.log(displayIt);
+	}
 });
 
 /*****************************************************************************/
@@ -9,40 +20,29 @@ Template.ListEvents.events({
 /*****************************************************************************/
 Template.ListEvents.helpers({
 	events: function() {
-		var galilUserId = 'RzfsYFgAHCrP2iu84';
-		console.log(galilUserId.email);
 		//var theUser = Meteor.users.find({_id: this.userId});
-		var businessType = Meteor.user().profile.businessName;
-		//console.log(businessType);
-		//return Events.find({createdBy: Meteor.userId()}, {sort: {createdAt: -1}});
-		//return Events.find({createdBy: galilUserId}, {sort: {createdAt: -1}});
-		//return Events.find({createdFromAccount: businessType}, {sort: {createdAt: -1}});
-		return Events.find({createdFromAccount: businessType}, {sort: {createdAt: -1}});
+		if (!Meteor.user().profile.businessName){  					// If it is the root user, they don't have a profile.businessName
+			var businessType = Meteor.user().emails[0].address; 	// So in that case the businessType takes their email
+		}															// Which serves as the businessType for all children of the root user
+		else{
+			var businessType = Meteor.user().profile.businessName;	// Otherwise, businessType gets assigned the profile.businessName of the regular child user
+		}
+		return Events.find({createdFromAccount: businessType}, {sort: {date: 1}});
 
 	},
 
 	'isManager':function(){
 		var currentUserId = Meteor.userId();
-		console.log(Meteor.user(currentUserId).profile);
-		if (Meteor.user(currentUserId).profile == "Server"){
+		//console.log(Meteor.user(currentUserId).profile);
+		if (Meteor.user(currentUserId).profile.type == "Server"){
 			return false;
 		}
 		else{
 			return true;
-		}
-	},
-
-	'createdByGalil': function(){
-		var galilUserId = '6hWHLdvo7wHpPH5gE';
-		if (this.createdBy == galilUserId){
-			console.log("It is returning true");
-			return true;
-		}
-		else{
-			console.log("It is returning false");
-			return false;
 		}
 	}
+
+	
 });
 
 /*****************************************************************************/

@@ -51,7 +51,7 @@ SettingsController = RouteController.extend({
 
   create: function() {
     this.render('Adduser', {});
-    
+  
   },
 
   onAfterAction: function () {

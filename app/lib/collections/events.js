@@ -37,7 +37,17 @@ Events.attachSchema(new SimpleSchema({
   },
   date: {
     type: Date,
-    label: "Date Of Event"
+    label: "Date Of Event",
+    autoform: {
+          type: "datetime-local",
+          //timezoneId: "America/New_York"
+    }
+  },
+  eventType: {
+    type: String,
+    label: "Event Type",
+    allowedValues: ['Lunch', 'Brunch', 'Dinner'],
+    optional: false
   },
   confirmed: {
     type: Boolean,
@@ -58,6 +68,18 @@ Events.attachSchema(new SimpleSchema({
     //max: 100,
     //var user = this.userId;
     //console.log(user);
-    autoValue:function(){return Meteor.user().profile.businessName}
+     
+    autoValue:function(){
+      var currentUserId = Meteor.user();
+      if(!Meteor.user(currentUserId).profile.businessName){ //If it is the root user, there is no profile.businessName
+      //autoValue:function()
+      return Meteor.user().emails[0].address; // So in that case use the email, which become everyone;s profile.businessName
+      }
+      else{
+      return Meteor.user().profile.businessName;
+      }
+    }
+  
+
   }
 }));

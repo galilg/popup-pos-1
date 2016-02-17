@@ -11,14 +11,21 @@
     <table class="table table=hover">
     	<thead>
     		<tr>
-    			<th>User Name</th>
+    			<th>Email</th>
     			<th>Account Type</th>
     			<th>Edit</th>
     			<th>Delete Account</th>
     		</tr>
        	</thead>
-       	<tbody>
-       		
+        <tbody>
+          {{#each userDB}}
+          <tr class = "userAccounts {{selectedClass}}">
+            <td>{{emails.[0].address}}</td>
+            <td>{{profile.type}}</td>
+            <td>{{#linkTo route='EditUser'}}<span class="glyphicon glyphicon-edit {{deleteThisGuy}}" aria-hidden="true"></span>{{/linkTo}}</td>
+            <td><span class="glyphicon glyphicon-remove theDeleteButton"></span></td>           
+          </tr>  
+          {{/each}}
        	</tbody>
       </table>
   </div>

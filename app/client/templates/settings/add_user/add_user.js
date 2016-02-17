@@ -6,7 +6,7 @@
 AutoForm.hooks({
 	addUserForm: {
 		onSuccess: function(doc)  {
-			Router.go('adduser');
+			Router.go('addUser');
 		}
 	}
 });
@@ -41,18 +41,14 @@ Template.Adduser.onDestroyed(function () {
 });
 
 Template.Adduser.events({
-    'click .Adduser': function(){
-
-        console.log("Got the click");
-    },
 
     'submit form': function(event){
         event.preventDefault();
         var currentUserId = Meteor.userId();
-        console.log("This is the current user Id: ");
-        console.log(currentUserId);
-        console.log("This is the profile: ");
-        console.log(Meteor.user(currentUserId).profile);
+        //console.log("This is the current user Id: ");
+        //console.log(currentUserId);
+        //console.log("This is the profile: ");
+        //console.log(Meteor.user(currentUserId).profile);
         var email = $('[name=email]').val();
         var password = $('[name=password]').val();
         var confirmPassword = $('[name=confirmPassword').val();
@@ -62,12 +58,17 @@ Template.Adduser.events({
             var accountName = Meteor.user(currentUserId).profile.businessName;
         }
         else{
-            var accountName = $('[name=accountName]').val();
-
+            //var accountName = $('[name=accountName]').val();
+            var accountName = Meteor.user(currentUserId).emails[0].address;
         }
-        console.log("This is the account name:");
-        console.log(accountName);
+        //console.log("This is the account name:");
+        //console.log(accountName);
+        //console.log("This is the account type:");
+        //console.log(accountType);
         if(password == confirmPassword){
+            Meteor.call('createNewUser', email, password, accountType, accountName);  //This calls createUser on the server side so that the user is not automatically logged in.
+            /*
+            The above call to createNewUser performs the following function but calls it from the method.js file on the server
             Accounts.createUser({
                 email: email,
                 password: password,
@@ -75,7 +76,7 @@ Template.Adduser.events({
                     type: accountType,
                     businessName: accountName
                 }
-            });
+            });*/
 
         Router.go('home');
         }
