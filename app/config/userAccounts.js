@@ -4,10 +4,15 @@ AccountsTemplates.configure({
 	//showAddRemoveServices: false;
 	//hideSignUpLink: true
 	onLogoutHook: function(){Router.go('/');},
-	
+
 	onSubmitHook: function(){
 		
-	}
+	},
+
+	texts:
+		{
+			pwdLink_pre: "",
+		}
 });
 
 AccountsTemplates.addFields([
