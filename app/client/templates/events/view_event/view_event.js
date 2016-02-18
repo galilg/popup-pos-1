@@ -33,6 +33,14 @@ Template.ViewEvent.helpers({
 
 	},
 
+	'foodItems': function() {
+		var currentEvent = Session.get('currentEvent');
+		var currUser = Meteor.userId();
+		var accountCreator = Meteor.user(currUser).profile.businessName; 	
+		return SelectedMenuItems.find({createdFromAccount: accountCreator, eventId: currentEvent});
+	},
+
+
 });
 
 /*****************************************************************************/
