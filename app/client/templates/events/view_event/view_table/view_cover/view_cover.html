@@ -7,15 +7,14 @@
     {{#if isChecked}}
     <form class="specifyAllergy">
     	<p><h4><span class="label label-default">Type of allergy</span><input type="text" class="form-control" placeholder="Allergy" name="theAllergy" value="{{getAllergy}}"></h4></p>
-    	<input type="submit" class="btn btn-primary" value="Enter Allergy">
+    	<!-- <input type="submit" class="btn btn-primary" value="Enter Allergy"> This button is not needed since it responds to change. -->
     </form>
     {{/if}}
     <table id="appTable" class="table table-hover">
     	<thead>
     		<tr>
     			<th>Appetizers</th>
-                <th>Temperature</th>
-                <th>Modifications</th>
+                <!-- <th>Temperature</th> -->
     		</tr>
     	</thead>
 
@@ -40,6 +39,10 @@
     	</tbody>
     </table>
 
+    <div>
+        Notes: <input type="text" name="appNotes" label="Notes: " placeholder="Modifications" id="appMods">
+    </div>
+
 <table id="mainTable" class="table table-hover">
     	<thead>
     		<tr>
@@ -52,8 +55,7 @@
     		{{#each mains}}
     			<tr class="mainItem {{selectedMain}}">
     				<td>{{itemName}}</td>
-                        {{#if takesTemp}}
-                        
+                        {{#if takesTemp}}  
                             <td>
                                 <select name="theTemps" id="mainTempSelect" >
                                     {{#each tempNames}}
@@ -70,6 +72,10 @@
     	</tbody>
     </table>
 
+    <div>
+        Notes: <input type="text" name="mainNotes" label="Notes: " placeholder="Modifications" id="mainMods">
+    </div>
+
 <table id="dessertTable" class="table table-hover">
     	<thead>
     		<tr>
@@ -85,6 +91,10 @@
     		{{/each}}
     	</tbody>
     </table>
+
+<div>
+        Notes: <input type="text" name="dessertNotes" label="Notes: " placeholder="Modifications" id="dessertMods">
+    </div>
 
 <table id="sideTable" class="table table-hover">
     	<thead>

@@ -31,7 +31,23 @@
                     <td>{{mainTemp}}</td>
     				<td>{{dessert}}</td>
     				<td>{{allergy}}</td>
-    				<td>{{notes}}</td>
+    				<td>
+                    {{#if appNotes}}
+                         <p>
+                            <b>Apps: </b>{{appNotes}} 
+                        </p>
+                    {{/if}}
+                    {{#if mainNotes}}
+                        <p>
+                            <b>Mains: </b>{{mainNotes}}
+                        </p>
+                    {{/if}}
+                    {{#if dessertNotes}}
+                        <p>
+                            <b>Desserts: </b>{{dessertNotes}}
+                        </p>
+                    {{/if}}
+                     </td>
     				<td><input type="checkbox" class="theCheckbox" value={{isChecked}} checked={{isChecked}}></td>
     			</tr>
     		{{/each}}

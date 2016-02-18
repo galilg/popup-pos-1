@@ -69,7 +69,8 @@ Template.ViewCover.events({
 		}
 	},
 
-	'submit form': function(event){
+	// 'submit form': function(event){
+	'change .specifyAllergy': function(event){
 		event.preventDefault();
 		var allergyDescription = $('[name=theAllergy]').val();
 		var currentCover = Session.get('currentCover');
@@ -96,6 +97,27 @@ Template.ViewCover.events({
 		Covers.update({_id: currentCover}, {$set: {mainTemp: temp}});
 
 	},
+
+	'change #appMods': function(event){
+		event.preventDefault();
+		var note = $('[name=appNotes').val();
+		var currentCover = Session.get('currentCover');
+		Covers.update({_id: currentCover}, {$set: {appNotes: note}})
+	},
+
+	'change #mainMods': function(event){
+		event.preventDefault();
+		var note = $('[name=mainNotes').val();
+		var currentCover = Session.get('currentCover');
+		Covers.update({_id: currentCover}, {$set: {mainNotes: note}})
+	},
+
+	'change #dessertMods': function(event){
+		event.preventDefault();
+		var note = $('[name=dessertNotes').val();
+		var currentCover = Session.get('currentCover');
+		Covers.update({_id: currentCover}, {$set: {dessertNotes: note}})
+	}
 });
 
 /*****************************************************************************/
