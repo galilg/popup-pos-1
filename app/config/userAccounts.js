@@ -9,10 +9,6 @@ AccountsTemplates.configure({
 		
 	},
 
-	texts:
-		{
-			pwdLink_pre: "",
-		}
 });
 
 AccountsTemplates.addFields([

@@ -60,8 +60,8 @@ Template.ViewCover.events({
 			Session.set('hasAllergyId', "");
 			var allergicId = AllergyList.findOne({eventId:currentEvent, allergicGuest: currentCover, createdFromAccount: accountCreator})._id;
 			var coversId = AllergyList.findOne({eventId:currentEvent, allergicGuest: currentCover, createdFromAccount: accountCreator}).allergicGuest;
-			console.log("This is the allergicId: ", allergicId);
-			console.log("THis is the covers id: ", coversId);
+			// console.log("This is the allergicId: ", allergicId);
+			// console.log("THis is the covers id: ", coversId);
 			Covers.update(coversId, {$set: {allergy:""}});  //First update the allergy attribute to blank before deleting from list.
 			AllergyList.remove({
 				_id: allergicId
@@ -75,7 +75,27 @@ Template.ViewCover.events({
 		var currentCover = Session.get('currentCover');
 		var currentEvent = Session.get('currentEvent');
 		Covers.update(currentCover, {$set:{allergy: allergyDescription}});
-	}
+	},
+
+	'change #appTempSelect':function(event){
+		event.preventDefault();
+		console.log("The temp has been changed.");
+		console.log($(event.currentTarget).find(':selected').val()); // This fetches the selected option value.
+		var temp = $(event.currentTarget).find(':selected').val()
+		var currentCover = Session.get('currentCover');
+		Covers.update({_id: currentCover}, {$set: {appTemp: temp}});
+
+	},
+
+	'change #mainTempSelect':function(event){
+		event.preventDefault();
+		// console.log("The temp has been changed.");
+		// console.log($(event.currentTarget).find(':selected').val()); // This fetches the selected option value.
+		var temp = $(event.currentTarget).find(':selected').val()
+		var currentCover = Session.get('currentCover');
+		Covers.update({_id: currentCover}, {$set: {mainTemp: temp}});
+
+	},
 });
 
 /*****************************************************************************/
@@ -181,7 +201,32 @@ Template.ViewCover.helpers({
 		else{
 			return " ";
 		}
+	},
+
+	'tempNames':function(){
+		var temps = ["Black n Blue", "Rare", "Med Rare", "Medium", "Med Well", "Well"];
+		return temps;
+	},
+
+	'selectedTemp':function(){
+		 var currentCover = Session.get('currentCover');
+		 var tempName = Covers.findOne({_id: currentCover}).mainTemp;
+		 //var temp = $(event.target).find('value').val();
+		 //var temp = $(event).find('value').val();
+		 console.log("tempName ", tempName);
+		 //console.log("temp ", temp);
+		 
+		 if("Medium" == tempName){
+		 	console.log("returning selected");
+		 	return "selected";
+		 }
+		 else{
+		 	return "false";
+		 }
+
 	}
+
+	
 });
 
 /*****************************************************************************/

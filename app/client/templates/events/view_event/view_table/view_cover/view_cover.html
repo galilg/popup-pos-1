@@ -14,6 +14,8 @@
     	<thead>
     		<tr>
     			<th>Appetizers</th>
+                <th>Temperature</th>
+                <th>Modifications</th>
     		</tr>
     	</thead>
 
@@ -21,6 +23,18 @@
     		{{#each apps}}
     			<tr class ="appItem {{selectedApp}}">
     				<td>{{itemName}}</td>
+                    {{#if takesTemp}}
+                            <td>
+                                <select name="theTemps" id="appTempSelect">
+                                    {{#each tempNames}}
+                                        <option value="{{this}}">{{this}}</option> 
+                                    {{/each}}
+                                 </select>
+                            </td>
+                           
+                    {{else}}
+                        <td></td>
+                    {{/if}}
     			</tr>
     		{{/each}}
     	</tbody>
@@ -30,6 +44,7 @@
     	<thead>
     		<tr>
     			<th>Mains</th>
+                
     		</tr>
     	</thead>
 
@@ -37,6 +52,19 @@
     		{{#each mains}}
     			<tr class="mainItem {{selectedMain}}">
     				<td>{{itemName}}</td>
+                        {{#if takesTemp}}
+                        
+                            <td>
+                                <select name="theTemps" id="mainTempSelect" >
+                                    {{#each tempNames}}
+                                        <option value="{{this}}"> {{this}}</option> 
+                                    {{/each}}
+                                 </select>
+                            </td>
+                           
+                    {{else}}
+                        <td></td>
+                    {{/if}}
     			</tr>
     		{{/each}}
     	</tbody>

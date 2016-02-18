@@ -75,7 +75,9 @@ Template.ViewTable.onCreated(function () {
 				event: eventId,
 				coverNumber: (i+1),
 				appetizer: "",
+				appTemp: "",
 				main: "",
+				mainTemp: "",
 				dessert: "",
 				allergy: "",
 				notes: ""
@@ -93,7 +95,9 @@ Template.ViewTable.onCreated(function () {
 						event: eventId,
 						coverNumber: (i + 1),
 						appetizer: "",
+						appTemp: "",
 						main: "",
+						mainTemp: "",
 						dessert: "",
 						allergy: "",
 						notes: ""
