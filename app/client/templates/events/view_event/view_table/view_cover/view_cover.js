@@ -12,6 +12,11 @@ Template.ViewCover.events({
 		var chosenApp = SelectedMenuItems.findOne({_id:this._id}).itemName;
 		var currentCover = Session.get('currentCover');
 		Covers.update({_id: currentCover}, {$set: {appetizer: chosenApp}});
+		// Even though at this point there is no spot for appTemp in the HTML,
+		// one can be made.
+		if (!Session.get('selectedApp').takesTemp){
+			Covers.update({_id: currentCover}, {$set: {appTemp: ""}});
+		}
 	},
 
 		'click .mainItem': function() {
@@ -19,6 +24,9 @@ Template.ViewCover.events({
 		var chosenMain = SelectedMenuItems.findOne({_id:this._id}).itemName;
 		var currentCover = Session.get('currentCover');
 		Covers.update({_id: currentCover}, {$set: {main: chosenMain}});
+		if (!Session.get('selectedMain').takesTemp){
+			Covers.update({_id: currentCover}, {$set: {mainTemp: ""}});
+		}
 	},
 
 		'click .dessertItem': function() {
