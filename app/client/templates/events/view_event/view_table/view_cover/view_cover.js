@@ -110,14 +110,29 @@ Template.ViewCover.events({
 		event.preventDefault();
 		var note = $('[name=appNotes').val();
 		var currentCover = Session.get('currentCover');
-		Covers.update({_id: currentCover}, {$set: {appNotes: note}})
+		Covers.update({_id: currentCover}, {$set: {appNotes: note}});
+	},
+
+	'click #clearAppMods': function(event){
+		event.preventDefault();
+		var currentCover = Session.get('currentCover');
+		Covers.update({_id: currentCover}, {$set: {appNotes: ""}});
+		
 	},
 
 	'change #mainMods': function(event){
 		event.preventDefault();
 		var note = $('[name=mainNotes').val();
 		var currentCover = Session.get('currentCover');
-		Covers.update({_id: currentCover}, {$set: {mainNotes: note}})
+		Covers.update({_id: currentCover}, {$set: {mainNotes: note}});
+	},
+
+	'click #clearMainMods': function(event){
+			event.preventDefault();
+			console.log("Clear main mods hit");
+			var currentCover = Session.get('currentCover');
+			Covers.update({_id: currentCover}, {$set: {mainNotes: ""}});
+		
 	},
 
 	'change #dessertMods': function(event){
@@ -125,7 +140,17 @@ Template.ViewCover.events({
 		var note = $('[name=dessertNotes').val();
 		var currentCover = Session.get('currentCover');
 		Covers.update({_id: currentCover}, {$set: {dessertNotes: note}})
-	}
+	},
+
+	'click #clearDessertMods': function(event){
+		event.preventDefault();
+		var currentCover = Session.get('currentCover');
+		Covers.update({_id: currentCover}, {$set: {dessertNotes: ""}});
+
+		
+	},
+
+
 });
 
 /*****************************************************************************/
