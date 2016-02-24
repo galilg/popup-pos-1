@@ -63,6 +63,10 @@ Template.ViewTable.helpers({
 		return SelectedMenuItems.find({createdFromAccount: accountCreator, eventId: currentEvent});
 	},
 
+	
+
+
+
 });
 
 /*****************************************************************************/
