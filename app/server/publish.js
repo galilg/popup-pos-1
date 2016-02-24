@@ -32,7 +32,8 @@ Meteor.users.allow({						//allows the remove function to work only if profile.t
 	remove:function(){
 		if(Meteor.user().profile.type == "Manager")
 			return true;
-	}
+	},
+
 })
 
 
