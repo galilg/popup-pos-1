@@ -6,7 +6,16 @@ Template.ViewEvent.events({
 		Session.set('selectedTable', this._id);
 		console.log("This is the selected table");
 		console.log(Session.get('selectedTable'));
-	}
+	},
+
+	'change #seeMenuBox': function(){
+		if (Session.get('showMenu') == "show"){
+			Session.set('showMenu', "hide");
+		}
+		else
+			(Session.set('showMenu', "show"));
+	},
+
 
 });
 
@@ -39,6 +48,16 @@ Template.ViewEvent.helpers({
 		var accountCreator = Meteor.user(currUser).profile.businessName; 	
 		return SelectedMenuItems.find({createdFromAccount: accountCreator, eventId: currentEvent});
 	},
+
+	'isChecked': function() {
+		if (Session.get('showMenu') == "show"){
+			return true;
+		}
+		else{
+			return false;
+		}
+
+	}
 
 
 });

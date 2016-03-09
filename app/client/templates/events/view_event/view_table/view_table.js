@@ -17,7 +17,24 @@ Template.ViewTable.events({
 		Session.set('currentCover', this._id);
 		var coverId = Session.get('currentCover');
 		console.log("This is the currentCover", coverId);
-	}
+	},
+
+		'change #seeMenuBox': function(){
+		if (Session.get('showMenu') == "show"){
+			Session.set('showMenu', "hide");
+		}
+		else
+			(Session.set('showMenu', "show"));
+	},
+
+	'change #seeMenuBox': function(){
+		if (Session.get('showMenu') == "show"){
+			Session.set('showMenu', "hide");
+		}
+		else
+			(Session.set('showMenu', "show"));
+	},
+
 });
 
 /*****************************************************************************/
@@ -63,7 +80,16 @@ Template.ViewTable.helpers({
 		return SelectedMenuItems.find({createdFromAccount: accountCreator, eventId: currentEvent});
 	},
 
-	
+	'isChecked': function() {
+		if (Session.get('showMenu') == "show"){
+			return true;
+		}
+		else{
+			return false;
+		}
+
+	},
+
 
 
 

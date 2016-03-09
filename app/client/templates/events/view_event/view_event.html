@@ -1,7 +1,7 @@
 <template name="ViewEvent">
 
-<h4><input type="checkbox" name="seeMenu" id="seeMenuBox"> Show Menu</h4>
-
+<h4><input type="checkbox" name="seeMenu" id="seeMenuBox" value="{{isChecked}}" checked="{{isChecked}}"> Show Menu</h4>
+{{#if isChecked}}
   <div><h3>Menu for: {{selectedEvent.name}}</h3>
     <table class="table table-hover">
       <thead>
@@ -25,6 +25,8 @@
       </tbody>
     </table>
   </div>
+  {{/if}}
+
   <div> <h3>Tables for: {{selectedEvent.name}}</h3>
   {{#linkTo route="createTable"}}
   	<button type="button" class="btn btn-primary">

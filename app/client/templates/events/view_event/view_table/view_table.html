@@ -3,6 +3,8 @@
   	<div>
   		<button type="button" id="back" class="btn btn-primary">Back to Event</button>
   	</div>
+    <h4><input type="checkbox" name="seeMenu" id="seeMenuBox" value="{{isChecked}}" checked="{{isChecked}}"> Show Menu</h4>
+    {{#if isChecked}}
     <h1>Event: {{getEventName}}</h1>
     <h1>Table: {{getTableName}}</h1>
     <h3>Selected Menu</h3>
@@ -27,6 +29,7 @@
         {{/each}}
       </tbody>
     </table>
+    {{/if}}
     <table class="table table-hover">
     	<thead>
     		<tr>

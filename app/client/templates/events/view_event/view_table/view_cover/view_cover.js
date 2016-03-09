@@ -2,6 +2,14 @@
 /* ViewCover: Event Handlers */
 /*****************************************************************************/
 Template.ViewCover.events({
+	'change #seeMenuBox': function(){
+		if (Session.get('showMenu') == "show"){
+			Session.set('showMenu', "hide");
+		}
+		else
+			(Session.set('showMenu', "show"));
+	},
+
 	'click #backToTable': function(){
 		var currentTableId = Session.get('selectedTable');
 		Router.go('viewTable', {_id: currentTableId});
