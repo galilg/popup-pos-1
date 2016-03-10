@@ -56,3 +56,7 @@ Meteor.publish('covers', function () {
 Meteor.publish('allergyList', function () {
   return AllergyList.find();
 });
+
+Meteor.publish('itemCounts', function () {
+  return ItemCounts.find();
+});

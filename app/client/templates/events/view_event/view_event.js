@@ -42,6 +42,12 @@ Template.ViewEvent.helpers({
 
 	},
 
+	'tallyList': function(){
+		var currentEvent = Session.get('currentEvent');
+		return ItemCounts.find({event: currentEvent}, {sort: {order: 1}});
+	},
+
+
 	'foodItems': function() {
 		var currentEvent = Session.get('currentEvent');
 		var currUser = Meteor.userId();

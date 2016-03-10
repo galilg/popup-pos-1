@@ -2,13 +2,6 @@
 /* ViewCover: Event Handlers */
 /*****************************************************************************/
 Template.ViewCover.events({
-	'change #seeMenuBox': function(){
-		if (Session.get('showMenu') == "show"){
-			Session.set('showMenu', "hide");
-		}
-		else
-			(Session.set('showMenu', "show"));
-	},
 
 	'click #backToTable': function(){
 		var currentTableId = Session.get('selectedTable');
@@ -19,11 +12,49 @@ Template.ViewCover.events({
 		Session.set('selectedApp', this._id);
 		var chosenApp = SelectedMenuItems.findOne({_id:this._id}).itemName;
 		var currentCover = Session.get('currentCover');
+		var currentEvent = Session.get('currentEvent');
+		var currentTable = Session.get('selectedTable');
+		var appList = [];
+		SelectedMenuItems.find({eventId: currentEvent, course: "Appetizer"}).forEach(function (obj){appList.push(obj.itemName)})
 		Covers.update({_id: currentCover}, {$set: {appetizer: chosenApp}});
 		// Even though at this point there is no spot for appTemp in the HTML,
 		// one can be made.
 		if (!Session.get('selectedApp').takesTemp){
 			Covers.update({_id: currentCover}, {$set: {appTemp: ""}});
+		}
+		// This will search for the appetizer within the ItemCounts collection tagged with the currentEvent.
+		// If found, then we will retally all of the appetizers.  If not, it will create an entry in ItemCounts
+		// And tally them.
+		if (ItemCounts.findOne({table: currentTable, appetizer: chosenApp})) {
+			for (x in appList){
+				var tableId = ItemCounts.findOne({table: currentTable, appetizer: appList[x]})._id;
+				var tableTally = Covers.find({table: currentTable, appetizer: appList[x]}).count();
+				ItemCounts.update({_id: tableId}, {$set: {tally: tableTally}});
+			}
+		}
+		else{ 
+			ItemCounts.insert({
+				table: currentTable,
+				appetizer: chosenApp,
+				tally: 1,
+				order: 1
+			})
+		}
+
+		if (ItemCounts.findOne({event: currentEvent, appetizer: chosenApp})) {
+				for (x in appList){
+					var eventId = ItemCounts.findOne({event: currentEvent, appetizer: appList[x]})._id;
+					var eventTally = Covers.find({event: currentEvent, appetizer: appList[x]}).count();
+					ItemCounts.update({_id: eventId}, {$set: {tally: eventTally}});
+			}
+		}
+		else{
+			ItemCounts.insert({
+				event: currentEvent,
+				appetizer: chosenApp,
+				tally: 1,
+				order: 1
+			})
 		}
 	},
 
@@ -31,17 +62,89 @@ Template.ViewCover.events({
 		Session.set('selectedMain', this._id);
 		var chosenMain = SelectedMenuItems.findOne({_id:this._id}).itemName;
 		var currentCover = Session.get('currentCover');
+		var currentEvent = Session.get('currentEvent');
+		var currentTable = Session.get('selectedTable');
+		var mainList = [];
+		SelectedMenuItems.find({eventId: currentEvent, course: "Main"}).forEach(function (obj){mainList.push(obj.itemName)})
 		Covers.update({_id: currentCover}, {$set: {main: chosenMain}});
 		if (!Session.get('selectedMain').takesTemp){
 			Covers.update({_id: currentCover}, {$set: {mainTemp: ""}});
 		}
+
+		if (ItemCounts.findOne({table: currentTable, main: chosenMain})){
+				for (x in mainList){
+				var tableTally = Covers.find({table: currentTable, main: mainList[x]}).count();
+				var tableId = ItemCounts.findOne({table: currentTable, main: mainList[x]})._id;
+				ItemCounts.update({_id: tableId}, {$set: {tally: tableTally}});
+			}
+		}
+		else{ 
+			ItemCounts.insert({
+				table: currentTable,
+				main: chosenMain,
+				tally: 1,
+				order: 2
+			})
+		}
+		if (ItemCounts.findOne({event: currentEvent, main: chosenMain})){
+			for(x in mainList){
+				var eventTally = Covers.find({event: currentEvent, main: mainList[x]}).count();
+				var eventId = ItemCounts.findOne({event: currentEvent, main: mainList[x]})._id;
+				ItemCounts.update({_id: eventId}, {$set: {tally: eventTally}});
+			}
+		}
+		else{
+			ItemCounts.insert({
+				event: currentEvent,
+				main: chosenMain,
+				tally: 1,
+				order: 2
+			})
+		}
+
 	},
 
 		'click .dessertItem': function() {
 		Session.set('selectedDessert', this._id);
 		var chosenDessert = SelectedMenuItems.findOne({_id:this._id}).itemName;
 		var currentCover = Session.get('currentCover');
+		var currentEvent = Session.get('currentEvent');
+		var currentTable = Session.get('selectedTable');
+		var dessertList = [];
+		SelectedMenuItems.find({eventId: currentEvent, course: "Dessert"}).forEach(function (obj){dessertList.push(obj.itemName)})
 		Covers.update({_id: currentCover}, {$set: {dessert: chosenDessert}});
+
+		if (ItemCounts.findOne({table: currentTable, dessert: chosenDessert})){
+			for (x in dessertList){
+				var tableTally = Covers.find({table: currentTable, dessert: dessertList[x]}).count();
+				var tableId = ItemCounts.findOne({table: currentTable, dessert: dessertList[x]})._id;
+				ItemCounts.update({_id: tableId}, {$set: {tally: tableTally}});
+			}
+		}
+		else{ 
+			ItemCounts.insert({
+				table: currentTable,
+				dessert: chosenDessert,
+				tally: 1,
+				order: 3
+			})
+		}
+		if (ItemCounts.findOne({event: currentEvent, dessert: chosenDessert})){
+			for (x in dessertList){
+				var eventTally = Covers.find({event: currentEvent, dessert: dessertList[x]}).count();
+				var eventId = ItemCounts.findOne({event: currentEvent, dessert: dessertList[x]})._id;
+				ItemCounts.update({_id: eventId}, {$set: {tally: eventTally}});
+			}	
+
+		}
+		else{
+			ItemCounts.insert({
+				event: currentEvent,
+				dessert: chosenDessert,
+				tally: 1,
+				order: 3
+			})
+		}
 	},
 
 		'click .sideItem': function() {
@@ -106,8 +209,6 @@ Template.ViewCover.events({
 
 	'change #mainTempSelect':function(event){
 		event.preventDefault();
-		// console.log("The temp has been changed.");
-		// console.log($(event.currentTarget).find(':selected').val()); // This fetches the selected option value.
 		var temp = $(event.currentTarget).find(':selected').val()
 		var currentCover = Session.get('currentCover');
 		Covers.update({_id: currentCover}, {$set: {mainTemp: temp}});

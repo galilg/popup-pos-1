@@ -19,7 +19,7 @@ Template.ViewTable.events({
 		console.log("This is the currentCover", coverId);
 	},
 
-		'change #seeMenuBox': function(){
+	'change #seeMenuBox': function(){
 		if (Session.get('showMenu') == "show"){
 			Session.set('showMenu', "hide");
 		}
@@ -79,6 +79,16 @@ Template.ViewTable.helpers({
 		var accountCreator = Meteor.user(currUser).profile.businessName; 	
 		return SelectedMenuItems.find({createdFromAccount: accountCreator, eventId: currentEvent});
 	},
+
+	'tallyList': function(){
+		var currentTable = Session.get('selectedTable');
+		return ItemCounts.find({table: currentTable}, {sort: {order: 1}});
+	},
+
+	// 'covers': function() {
+	// 	var currentTable = Session.get('selectedTable');
+	// 	return Covers.find({table: currentTable});
+	// },
 
 	'isChecked': function() {
 		if (Session.get('showMenu') == "show"){
