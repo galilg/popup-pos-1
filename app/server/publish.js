@@ -60,3 +60,7 @@ Meteor.publish('allergyList', function () {
 Meteor.publish('itemCounts', function () {
   return ItemCounts.find();
 });
+
+Meteor.publish('temps', function () {
+  return Temps.find();
+});

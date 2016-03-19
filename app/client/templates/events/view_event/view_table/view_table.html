@@ -12,7 +12,7 @@
       <thead>
         <tr>
           <th>Food Item</th>
-          <th>Total Count</th>
+          <th>Table Count</th>
           <th>With Modifications</th>
           <th>Temps</th>
        </tr>
@@ -25,8 +25,29 @@
           <!-- <td>{{itemName}}</td> -->
           <td>{{appetizer}} {{main}} {{dessert}}</td>
           <td>{{tally}}</td>
-          <td>Will fill in</td>
-          <td>{{mainTemp}}</td>
+          <td>Will fill in</td> 
+          <td>
+            {{#if blackNblue}}
+                Black N Blue: {{blackNblue}} 
+            {{/if}}
+            {{#if rare}}
+                <br> Rare: {{rare}}
+            {{/if}} 
+            {{#if medRare}}
+                <br> Medium Rare: {{medRare}} 
+            {{/if}}
+            {{#if medium}}
+                <br> Medium: {{medium}} 
+            {{/if}}
+            {{#if medWell}}
+               <br> Med Well: {{medWell}} 
+            {{/if}}
+            {{#if well}}
+               <br> Well: {{well}}
+            {{/if}}
+          </td>
+            
+
         </tr>
         {{/each}}
       </tbody>

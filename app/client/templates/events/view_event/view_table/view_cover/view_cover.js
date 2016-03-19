@@ -4,6 +4,60 @@
 Template.ViewCover.events({
 
 	'click #backToTable': function(){
+		var chosenMain = Session.get('theChosenMainForTemp');//SelectedMenuItems.findOne({_id:this._id}).itemName;
+		var takesTemp = Menus.findOne({itemName: chosenMain}).takesTemp;  // The chosenMain takes a temp.
+		var currentCover = Session.get('currentCover');
+		var currentEvent = Session.get('currentEvent');
+		var currentTable = Session.get('selectedTable');
+		if(takesTemp){
+			console.log("Went into the sacred if");
+			var bnbTally = Covers.find({event: currentEvent, table: currentTable, main: chosenMain, mainTemp:"Black n Blue"}).count();
+
+			console.log("This is the count for the empty Black n blue: ", bnbTally);
+			var rareTally = Covers.find({event: currentEvent, table: currentTable, main: chosenMain, mainTemp:"Rare"}).count();
+			var medRareTally = Covers.find({event:currentEvent, table: currentTable, main: chosenMain, mainTemp: "Med Rare"}).count();
+			var mediumTally = Covers.find({event:currentEvent, table: currentTable, main: chosenMain, mainTemp: "Medium"}).count();
+			var medWellTally = Covers.find({event: currentEvent, table: currentTable, main: chosenMain, mainTemp: "Med Well"}).count();
+			var wellTally = Covers.find({event: currentEvent, table: currentTable, main: chosenMain, mainTemp: "Well"}).count();
+			console.log("This is the count for the medium: ", mediumTally);
+
+			if (ItemCounts.findOne({table:currentTable, main: chosenMain})){
+				console.log("Found and itemCount");
+				var tempsId = ItemCounts.findOne({table: currentTable, main: chosenMain})._id;
+				ItemCounts.update({_id: tempsId}, {$set: {blackNblue: bnbTally}});
+				ItemCounts.update({_id: tempsId}, {$set: {rare: rareTally}});
+				ItemCounts.update({_id: tempsId}, {$set: {medRare: medRareTally}});
+				ItemCounts.update({_id: tempsId}, {$set: {medium: mediumTally}});
+				ItemCounts.update({_id: tempsId}, {$set: {medWell: medWellTally}});
+				ItemCounts.update({_id: tempsId}, {$set: {well: wellTally}});
+			}
+			// if (Temps.findOne({event: currentEvent, table:currentTable, foodItem: chosenMain})){
+			// 	var tempsId = Temps.findOne({event: currentEvent, table: currentTable, foodItem: chosenMain})._id;
+			// 	Temps.update({_id: tempsId}, {$set: {blackNblue: bnbTally}});
+			// 	Temps.update({_id: tempsId}, {$set: {rare: rareTally}});
+			// 	Temps.update({_id: tempsId}, {$set: {medRare: medRareTally}});
+			// 	Temps.update({_id: tempsId}, {$set: {medium: mediumTally}});
+			// 	Temps.update({_id: tempsId}, {$set: {medWell: medWellTally}});
+			// 	Temps.update({_id: tempsId}, {$set: {well: wellTally}});
+			// }
+			// else{
+			// 	Temps.insert({
+			// 		event: currentEvent,
+			// 		table: currentTable,
+			// 		foodItem: chosenMain,
+			// 		blackNblue: bnbTally,
+			// 		rare: rareTally,
+			// 		medRare: medRareTally,
+			// 		medium: mediumTally,
+			// 		medWell: medWellTally,
+			// 		well: wellTally,	
+			// 	})
+			// }
+		}
+
+		////////////////////////
+		// Return to the viewTable page.
+
 		var currentTableId = Session.get('selectedTable');
 		Router.go('viewTable', {_id: currentTableId});
 	},
@@ -15,13 +69,27 @@ Template.ViewCover.events({
 		var currentEvent = Session.get('currentEvent');
 		var currentTable = Session.get('selectedTable');
 		var appList = [];
+
+		/////////////////////////////////
+		// Create a list of the app dishes and push it to appList from SelectedMenuItems collection.  
+		// This allows us to update the counts of all of the app dishes in the ItemCounts collection 
+		// by running through each of the items in appList (a mirror of SelectedMenuItems collection)
+		// and getting a count of all the covers that have selected that app on a certain table, for 
+		// the table count, and also on a certain event for the count of the items on the entire event.
+		// This allows for instantaneous updating of total counts each time an item is selected or changed
+		// from one to the next.
+
 		SelectedMenuItems.find({eventId: currentEvent, course: "Appetizer"}).forEach(function (obj){appList.push(obj.itemName)})
 		Covers.update({_id: currentCover}, {$set: {appetizer: chosenApp}});
+		
+		/////////////////////////////////
 		// Even though at this point there is no spot for appTemp in the HTML,
 		// one can be made.
 		if (!Session.get('selectedApp').takesTemp){
 			Covers.update({_id: currentCover}, {$set: {appTemp: ""}});
 		}
+
+		/////////////////////////////////
 		// This will search for the appetizer within the ItemCounts collection tagged with the currentEvent.
 		// If found, then we will retally all of the appetizers.  If not, it will create an entry in ItemCounts
 		// And tally them.
@@ -61,31 +129,83 @@ Template.ViewCover.events({
 		'click .mainItem': function() {
 		Session.set('selectedMain', this._id);
 		var chosenMain = SelectedMenuItems.findOne({_id:this._id}).itemName;
+		Session.set('theChosenMainForTemp', chosenMain);
+
 		var currentCover = Session.get('currentCover');
 		var currentEvent = Session.get('currentEvent');
 		var currentTable = Session.get('selectedTable');
 		var mainList = [];
+		var tempList = ["Black n Blue", "Med Rare", "Medium", "Med Well", "Well"];
+		var takesTemp = Menus.findOne({itemName: chosenMain}).takesTemp;  // The chosenMain takes a temp.
+
+		//////////////////////////////
+		// Create a list of the main dishes and push it to mainList from SelectedMenuItems collection.  
+		// This allows us to update the counts of all of the  main dishes in the ItemCounts collection 
+		// by running through each of the items in mainList (a mirror of SelectedMenuItems collection)
+		// and getting a count of all the covers that have selected that main on a certain table, for 
+		// the table count, and also on a certain event for the count of the items on the entire event.
+		// This allows for instantaneous updating of total counts each time an item is selected or changed
+		// from one to the next.
+
 		SelectedMenuItems.find({eventId: currentEvent, course: "Main"}).forEach(function (obj){mainList.push(obj.itemName)})
 		Covers.update({_id: currentCover}, {$set: {main: chosenMain}});
-		if (!Session.get('selectedMain').takesTemp){
+
+		/////////////////////////////////
+		// If the item is changed to something that doesn't take a temp, the previously chosen temp is deleted
+		if (!takesTemp) {
 			Covers.update({_id: currentCover}, {$set: {mainTemp: ""}});
 		}
 
+		//////////////////////////
+		// If it does take a temp but none is selected, it automatically sets t "Black n Blue", the default
+		// setting in the temp list. Although this is not ideal, it makes the most sense until I can set it to
+		// save the previously selected temperature when revisiting a cover.  If the item is not reclicked on
+		// it will retain its old value.
+
+		else {
+			Covers.update({_id: currentCover}, {$set: {mainTemp: "Black n Blue"}});
+		}
+
+
+		//////////////////////////
+		//  Run through Covers and find any main course in covers that is also on the current table.
+		//  Put this into a variable called tableTally, then update ItemCounts with the tableId that
+		//  matches the currentTable for that item to reflect the tally.
+		//  ItemCounts is used by viewTable.html to list a current count on each item.
+
+
 		if (ItemCounts.findOne({table: currentTable, main: chosenMain})){
 				for (x in mainList){
-				var tableTally = Covers.find({table: currentTable, main: mainList[x]}).count();
-				var tableId = ItemCounts.findOne({table: currentTable, main: mainList[x]})._id;
-				ItemCounts.update({_id: tableId}, {$set: {tally: tableTally}});
+					var tableTally = Covers.find({table: currentTable, main: mainList[x]}).count();
+					var tableId = ItemCounts.findOne({table: currentTable, main: mainList[x]})._id;
+					ItemCounts.update({_id: tableId}, {$set: {tally: tableTally}});
 			}
 		}
 		else{ 
+			
+		//  If this is the first instance of a table with a certain main course, create a new 
+		//  instance of it in ItemCounts.
+		
 			ItemCounts.insert({
 				table: currentTable,
 				main: chosenMain,
 				tally: 1,
-				order: 2
+				order: 2,
+				blackNblue: 0,
+				rare: 0,
+				medRare: 0,
+				medium: 0,
+				medWell: 0,
+				well: 0,	
 			})
 		}
+			
+		//////////////////////////////////
+		//   Run through covers and find any main course in covers that is also on the current 
+		//   event.  Put this number into a variable called eventTally, then update ItemCounts with
+		//   the eventId that matched the currentEvent for that item to reflect the total tally.
+		//   ItemCounts is then used by viewEvent.html to list a current count on each item.
+
 		if (ItemCounts.findOne({event: currentEvent, main: chosenMain})){
 			for(x in mainList){
 				var eventTally = Covers.find({event: currentEvent, main: mainList[x]}).count();
@@ -93,16 +213,28 @@ Template.ViewCover.events({
 				ItemCounts.update({_id: eventId}, {$set: {tally: eventTally}});
 			}
 		}
+
+		//////////////////////////////////
+		//  If this is the first instance of the an event with a certain main course, creat a new
+		//  instance of it in ItemCounts.  
+
 		else{
 			ItemCounts.insert({
 				event: currentEvent,
 				main: chosenMain,
 				tally: 1,
-				order: 2
+				order: 2,
+				blackNblue: 0,
+				rare: 0,
+				medRare: 0,
+				medium: 0,
+				medWell: 0,
+				well: 0,	
 			})
 		}
-
 	},
+
+
 
 		'click .dessertItem': function() {
 		Session.set('selectedDessert', this._id);
@@ -111,6 +243,16 @@ Template.ViewCover.events({
 		var currentEvent = Session.get('currentEvent');
 		var currentTable = Session.get('selectedTable');
 		var dessertList = [];
+
+		/////////////////////////////////
+		// Create a list of the dessert dishes and push it to dessertList from SelectedMenuItems collection.  
+		// This allows us to update the counts of all of the dessert dishes in the ItemCounts collection 
+		// by running through each of the items in dessertList (a mirror of SelectedMenuItems collection)
+		// and getting a count of all the covers that have selected that dessert on a certain table, for 
+		// the table count, and also on a certain event for the count of the items on the entire event.
+		// This allows for instantaneous updating of total counts each time an item is selected or changed
+		// from one to the next.
+
 		SelectedMenuItems.find({eventId: currentEvent, course: "Dessert"}).forEach(function (obj){dessertList.push(obj.itemName)})
 		Covers.update({_id: currentCover}, {$set: {dessert: chosenDessert}});
 
@@ -403,4 +545,5 @@ Template.ViewCover.onRendered(function () {
 });
 
 Template.ViewCover.onDestroyed(function () {
+
 });

@@ -85,6 +85,11 @@ Template.ViewTable.helpers({
 		return ItemCounts.find({table: currentTable}, {sort: {order: 1}});
 	},
 
+	'theMenus': function(){
+		return Menus.find({itemName: chosenMain, takesTemp: "true"}); 
+	},
+
+
 	// 'covers': function() {
 	// 	var currentTable = Session.get('selectedTable');
 	// 	return Covers.find({table: currentTable});
