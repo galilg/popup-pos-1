@@ -12,7 +12,6 @@ Template.ViewCover.events({
 			var currentEvent = Session.get('currentEvent');
 			var currentTable = Session.get('selectedTable');
 
-			if(takesTemp){
 				var bnbTally = Covers.find({event: currentEvent, table: currentTable, main: chosenMain, mainTemp:"Black n Blue"}).count();
 				var rareTally = Covers.find({event: currentEvent, table: currentTable, main: chosenMain, mainTemp:"Rare"}).count();
 				var medRareTally = Covers.find({event:currentEvent, table: currentTable, main: chosenMain, mainTemp: "Med Rare"}).count();
@@ -43,9 +42,8 @@ Template.ViewCover.events({
 					ItemCounts.update({_id: tempsId}, {$set: {medRare: medRareTotal}});
 					ItemCounts.update({_id: tempsId}, {$set: {medium: mediumTotal}});
 					ItemCounts.update({_id: tempsId}, {$set: {medWell: medWellTotal}});
-					ItemCounts.update({_id: tempsId}, {$set: {well: wellTally}});
+					ItemCounts.update({_id: tempsId}, {$set: {well: wellTotal}});
 				}
-			}
 		}
 
 		////////////////////////

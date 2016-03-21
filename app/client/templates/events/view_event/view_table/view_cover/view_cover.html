@@ -1,6 +1,6 @@
 <template name="ViewCover">
   <div class="view-cover">
-  	<button type="button" id="backToTable" class="btn btn-primary">Back to Table</button>
+  
     <h1>Table: {{getCurrentTable}}</h1>
     <h3>Position: {{getCurrentPosition}}</h3>
     <h4><input type="checkbox" id="hasAllergy" value="{{isChecked}}" checked="{{isChecked}}"> Allergy</h4>
@@ -101,21 +101,9 @@
         <button type="button" class="btn btn-primary" id="clearDessertMods">Clear</button>
     </div>
 
-<table id="sideTable" class="table table-hover">
-    	<thead>
-    		<tr>
-    			<th>Sides</th>
-    		</tr>
-    	</thead>
-
-    	<tbody>
-    		{{#each sides}}
-    			<tr class="sideItem {{selectedDessert}}">
-    				<td>{{itemName}}</td>
-    			</tr>
-    		{{/each}}
-    	</tbody>
-    </table>
+  <p align="right">
+    <button type="button" id="backToTable" class="btn btn-primary">Submit</button>
+  </p>
 
   </div>
 </template>
