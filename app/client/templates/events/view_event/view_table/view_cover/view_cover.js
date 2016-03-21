@@ -5,48 +5,46 @@ Template.ViewCover.events({
 
 	'click #backToTable': function(){
 		var chosenMain = Session.get('theChosenMainForTemp');//SelectedMenuItems.findOne({_id:this._id}).itemName;
-		var takesTemp = Menus.findOne({itemName: chosenMain}).takesTemp;  // The chosenMain takes a temp.
-		var currentCover = Session.get('currentCover');
-		var currentEvent = Session.get('currentEvent');
-		var currentTable = Session.get('selectedTable');
+		if (chosenMain){  // If back to table is selected without chosing a main course chosenMain 
+						  // remains undefined and the following operations fail.	
+			var takesTemp = Menus.findOne({itemName: chosenMain}).takesTemp;  // The chosenMain takes a temp.
+			var currentCover = Session.get('currentCover');
+			var currentEvent = Session.get('currentEvent');
+			var currentTable = Session.get('selectedTable');
 
-		if(takesTemp){
-			console.log("Went into the sacred if");
-			var bnbTally = Covers.find({event: currentEvent, table: currentTable, main: chosenMain, mainTemp:"Black n Blue"}).count();
+			if(takesTemp){
+				var bnbTally = Covers.find({event: currentEvent, table: currentTable, main: chosenMain, mainTemp:"Black n Blue"}).count();
+				var rareTally = Covers.find({event: currentEvent, table: currentTable, main: chosenMain, mainTemp:"Rare"}).count();
+				var medRareTally = Covers.find({event:currentEvent, table: currentTable, main: chosenMain, mainTemp: "Med Rare"}).count();
+				var mediumTally = Covers.find({event:currentEvent, table: currentTable, main: chosenMain, mainTemp: "Medium"}).count();
+				var medWellTally = Covers.find({event: currentEvent, table: currentTable, main: chosenMain, mainTemp: "Med Well"}).count();
+				var wellTally = Covers.find({event: currentEvent, table: currentTable, main: chosenMain, mainTemp: "Well"}).count();
 
-			console.log("This is the count for the empty Black n blue: ", bnbTally);
-			var rareTally = Covers.find({event: currentEvent, table: currentTable, main: chosenMain, mainTemp:"Rare"}).count();
-			var medRareTally = Covers.find({event:currentEvent, table: currentTable, main: chosenMain, mainTemp: "Med Rare"}).count();
-			var mediumTally = Covers.find({event:currentEvent, table: currentTable, main: chosenMain, mainTemp: "Medium"}).count();
-			var medWellTally = Covers.find({event: currentEvent, table: currentTable, main: chosenMain, mainTemp: "Med Well"}).count();
-			var wellTally = Covers.find({event: currentEvent, table: currentTable, main: chosenMain, mainTemp: "Well"}).count();
-			console.log("This is the count for the medium: ", mediumTally);
+				if (ItemCounts.findOne({table:currentTable, main: chosenMain})){
+					var tempsId = ItemCounts.findOne({table: currentTable, main: chosenMain})._id;
+					ItemCounts.update({_id: tempsId}, {$set: {blackNblue: bnbTally}});
+					ItemCounts.update({_id: tempsId}, {$set: {rare: rareTally}});
+					ItemCounts.update({_id: tempsId}, {$set: {medRare: medRareTally}});
+					ItemCounts.update({_id: tempsId}, {$set: {medium: mediumTally}});
+					ItemCounts.update({_id: tempsId}, {$set: {medWell: medWellTally}});
+					ItemCounts.update({_id: tempsId}, {$set: {well: wellTally}});
+				}
 
-			if (ItemCounts.findOne({table:currentTable, main: chosenMain})){
-				console.log("Found and itemCount");
-				var tempsId = ItemCounts.findOne({table: currentTable, main: chosenMain})._id;
-				ItemCounts.update({_id: tempsId}, {$set: {blackNblue: bnbTally}});
-				ItemCounts.update({_id: tempsId}, {$set: {rare: rareTally}});
-				ItemCounts.update({_id: tempsId}, {$set: {medRare: medRareTally}});
-				ItemCounts.update({_id: tempsId}, {$set: {medium: mediumTally}});
-				ItemCounts.update({_id: tempsId}, {$set: {medWell: medWellTally}});
-				ItemCounts.update({_id: tempsId}, {$set: {well: wellTally}});
-			}
-
-			var bnbTotal = Covers.find({event: currentEvent, main: chosenMain, mainTemp:"Black n Blue"}).count();
-			var rareTotal = Covers.find({event: currentEvent, main: chosenMain, mainTemp:"Rare"}).count();
-			var medRareTotal = Covers.find({event:currentEvent, main: chosenMain, mainTemp: "Med Rare"}).count();
-			var mediumTotal = Covers.find({event:currentEvent,  main: chosenMain, mainTemp: "Medium"}).count();
-			var medWellTotal = Covers.find({event: currentEvent,  main: chosenMain, mainTemp: "Med Well"}).count();
-			var wellTotal = Covers.find({event: currentEvent,  main: chosenMain, mainTemp: "Well"}).count();
-			if (ItemCounts.findOne({event: currentEvent, main: chosenMain})){
-				var tempsId = ItemCounts.findOne({event: currentEvent, main: chosenMain})._id;
-				ItemCounts.update({_id: tempsId}, {$set: {blackNblue: bnbTotal}});
-				ItemCounts.update({_id: tempsId}, {$set: {rare: rareTotal}});
-				ItemCounts.update({_id: tempsId}, {$set: {medRare: medRareTotal}});
-				ItemCounts.update({_id: tempsId}, {$set: {medium: mediumTotal}});
-				ItemCounts.update({_id: tempsId}, {$set: {medWell: medWellTotal}});
-				ItemCounts.update({_id: tempsId}, {$set: {well: wellTally}});
+				var bnbTotal = Covers.find({event: currentEvent, main: chosenMain, mainTemp:"Black n Blue"}).count();
+				var rareTotal = Covers.find({event: currentEvent, main: chosenMain, mainTemp:"Rare"}).count();
+				var medRareTotal = Covers.find({event:currentEvent, main: chosenMain, mainTemp: "Med Rare"}).count();
+				var mediumTotal = Covers.find({event:currentEvent,  main: chosenMain, mainTemp: "Medium"}).count();
+				var medWellTotal = Covers.find({event: currentEvent,  main: chosenMain, mainTemp: "Med Well"}).count();
+				var wellTotal = Covers.find({event: currentEvent,  main: chosenMain, mainTemp: "Well"}).count();
+				if (ItemCounts.findOne({event: currentEvent, main: chosenMain})){
+					var tempsId = ItemCounts.findOne({event: currentEvent, main: chosenMain})._id;
+					ItemCounts.update({_id: tempsId}, {$set: {blackNblue: bnbTotal}});
+					ItemCounts.update({_id: tempsId}, {$set: {rare: rareTotal}});
+					ItemCounts.update({_id: tempsId}, {$set: {medRare: medRareTotal}});
+					ItemCounts.update({_id: tempsId}, {$set: {medium: mediumTotal}});
+					ItemCounts.update({_id: tempsId}, {$set: {medWell: medWellTotal}});
+					ItemCounts.update({_id: tempsId}, {$set: {well: wellTally}});
+				}
 			}
 		}
 
