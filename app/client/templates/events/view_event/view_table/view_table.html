@@ -13,19 +13,17 @@
         <tr>
           <th>Food Item</th>
           <th>Table Count</th>
-          <th>With Modifications</th>
           <th>Temps</th>
        </tr>
      </thead>
 
       <tbody>
        <!-- {{#each foodItems}} -->
-       {{#each tallyList}}
+       {{#each tableTallyList}}
         <tr>
           <!-- <td>{{itemName}}</td> -->
           <td>{{appetizer}} {{main}} {{dessert}}</td>
           <td>{{tally}}</td>
-          <td>Will fill in</td> 
           <td>
             {{#if blackNblue}}
                 Black N Blue: {{blackNblue}} 
@@ -57,12 +55,12 @@
     	<thead>
     		<tr>
     		<th>Edit</th>
-    		<th>Guest</th>
-    		<th>Appetizer</th>
+    		<th class="guests">Guest</th>
+    		<th class="apps">Appetizer</th>
             <!-- <th>Temp</th> -->
-    		<th>Main</th>
+    		<th class="mains">Main</th>
             <th>Temp</th>
-    		<th>Dessert</th>
+    		<th class="desserts">Dessert</th>
     		<th>Allergy</th>
     		<th>Special Note</th>
     		<th>Status</th>
@@ -81,17 +79,17 @@
     				<td>{{allergy}}</td>
     				<td>
                     {{#if appNotes}}
-                         <p>
+                         <p class="modifiedAppHighlight">
                             <b>Apps: </b>{{appNotes}} 
                         </p>
                     {{/if}}
                     {{#if mainNotes}}
-                        <p>
+                        <p class="modifiedMainHighlight">
                             <b>Mains: </b>{{mainNotes}}
                         </p>
                     {{/if}}
                     {{#if dessertNotes}}
-                        <p>
+                        <p class="modifiedDessertHighlight">
                             <b>Desserts: </b>{{dessertNotes}}
                         </p>
                     {{/if}}
@@ -101,11 +99,6 @@
     		{{/each}}
     	</tbody>
     </table>
-    <footer>
-    <p>E</p>
-    <p>N</p>
-    <p>D</p>
     
-    </footer>
   </div>
 </template>

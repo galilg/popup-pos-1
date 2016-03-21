@@ -63,7 +63,8 @@ Template.ViewEvent.helpers({
 			return false;
 		}
 
-	}
+	},
+
 
 
 });

@@ -9,6 +9,7 @@ Template.ViewCover.events({
 		var currentCover = Session.get('currentCover');
 		var currentEvent = Session.get('currentEvent');
 		var currentTable = Session.get('selectedTable');
+
 		if(takesTemp){
 			console.log("Went into the sacred if");
 			var bnbTally = Covers.find({event: currentEvent, table: currentTable, main: chosenMain, mainTemp:"Black n Blue"}).count();
@@ -31,28 +32,22 @@ Template.ViewCover.events({
 				ItemCounts.update({_id: tempsId}, {$set: {medWell: medWellTally}});
 				ItemCounts.update({_id: tempsId}, {$set: {well: wellTally}});
 			}
-			// if (Temps.findOne({event: currentEvent, table:currentTable, foodItem: chosenMain})){
-			// 	var tempsId = Temps.findOne({event: currentEvent, table: currentTable, foodItem: chosenMain})._id;
-			// 	Temps.update({_id: tempsId}, {$set: {blackNblue: bnbTally}});
-			// 	Temps.update({_id: tempsId}, {$set: {rare: rareTally}});
-			// 	Temps.update({_id: tempsId}, {$set: {medRare: medRareTally}});
-			// 	Temps.update({_id: tempsId}, {$set: {medium: mediumTally}});
-			// 	Temps.update({_id: tempsId}, {$set: {medWell: medWellTally}});
-			// 	Temps.update({_id: tempsId}, {$set: {well: wellTally}});
-			// }
-			// else{
-			// 	Temps.insert({
-			// 		event: currentEvent,
-			// 		table: currentTable,
-			// 		foodItem: chosenMain,
-			// 		blackNblue: bnbTally,
-			// 		rare: rareTally,
-			// 		medRare: medRareTally,
-			// 		medium: mediumTally,
-			// 		medWell: medWellTally,
-			// 		well: wellTally,	
-			// 	})
-			// }
+
+			var bnbTotal = Covers.find({event: currentEvent, main: chosenMain, mainTemp:"Black n Blue"}).count();
+			var rareTotal = Covers.find({event: currentEvent, main: chosenMain, mainTemp:"Rare"}).count();
+			var medRareTotal = Covers.find({event:currentEvent, main: chosenMain, mainTemp: "Med Rare"}).count();
+			var mediumTotal = Covers.find({event:currentEvent,  main: chosenMain, mainTemp: "Medium"}).count();
+			var medWellTotal = Covers.find({event: currentEvent,  main: chosenMain, mainTemp: "Med Well"}).count();
+			var wellTotal = Covers.find({event: currentEvent,  main: chosenMain, mainTemp: "Well"}).count();
+			if (ItemCounts.findOne({event: currentEvent, main: chosenMain})){
+				var tempsId = ItemCounts.findOne({event: currentEvent, main: chosenMain})._id;
+				ItemCounts.update({_id: tempsId}, {$set: {blackNblue: bnbTotal}});
+				ItemCounts.update({_id: tempsId}, {$set: {rare: rareTotal}});
+				ItemCounts.update({_id: tempsId}, {$set: {medRare: medRareTotal}});
+				ItemCounts.update({_id: tempsId}, {$set: {medium: mediumTotal}});
+				ItemCounts.update({_id: tempsId}, {$set: {medWell: medWellTotal}});
+				ItemCounts.update({_id: tempsId}, {$set: {well: wellTally}});
+			}
 		}
 
 		////////////////////////
@@ -68,6 +63,8 @@ Template.ViewCover.events({
 		var currentCover = Session.get('currentCover');
 		var currentEvent = Session.get('currentEvent');
 		var currentTable = Session.get('selectedTable');
+		Session.set('theChosenApp', chosenApp);
+
 		var appList = [];
 
 		/////////////////////////////////
@@ -197,6 +194,7 @@ Template.ViewCover.events({
 				medium: 0,
 				medWell: 0,
 				well: 0,	
+				modifications: 0,
 			})
 		}
 			
@@ -230,6 +228,7 @@ Template.ViewCover.events({
 				medium: 0,
 				medWell: 0,
 				well: 0,	
+				modifications: 0,
 			})
 		}
 	},
@@ -242,6 +241,8 @@ Template.ViewCover.events({
 		var currentCover = Session.get('currentCover');
 		var currentEvent = Session.get('currentEvent');
 		var currentTable = Session.get('selectedTable');
+		Session.set('theChosenDessert', chosenDessert);
+
 		var dessertList = [];
 
 		/////////////////////////////////

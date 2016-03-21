@@ -35,6 +35,22 @@ Template.ViewTable.events({
 			(Session.set('showMenu', "show"));
 	},
 
+	'click .guests': function(){
+		Session.set('sortBy', "coverNumber");
+	},
+
+	'click .apps': function(){
+		Session.set('sortBy', "appetizer");
+	},
+
+	'click .mains': function(){
+		Session.set('sortBy', "main");
+	},
+
+	'click .desserts': function(){
+		Session.set('sortBy', "dessert");
+	},
+
 });
 
 /*****************************************************************************/
@@ -44,7 +60,39 @@ Template.ViewTable.helpers({
 	'theCovers':function(){
 		var tableId = Session.get('selectedTable');
 		var eventId = Session.get('currentEvent');
-		return Covers.find({table: tableId, event: eventId}, {sort: {coverNumber: 1}});
+		var orderOfSort = Session.get('sortBy');
+		console.log("This is the sortBy: ", orderOfSort);
+		// return Covers.find({table: tableId, event: eventId}, {sort: {coverNumber: 1}});
+		if (orderOfSort == "coverNumber"){
+			return Covers.find({table: tableId, event: eventId}, {sort: {coverNumber: 1}});
+		}
+		else if(orderOfSort == "appetizer"){
+			return Covers.find({table: tableId, event: eventId}, {sort: {appetizer: 1}});
+		}
+		else if(orderOfSort == "main"){
+			return Covers.find({table: tableId, event: eventId}, {sort: {main: 1}});
+		}
+		else if(orderOfSort == "dessert"){
+			return Covers.find({table: tableId, event: eventId}, {sort: {dessert: 1}});
+		}
+	},
+
+	'theApps': function(){
+		var tableId = Session.get('selectedTable');
+		var eventId = Session.get('currentEvent');
+		return Covers.find({table: tableId, event: eventId}, {sort: {appetizer: 1}});
+	},
+
+	'theMains': function(){
+		var tableId = Session.get('selectedTable');
+		var eventId = Session.get('currentEvent');
+		return Covers.find({table: tableId, event: eventId}, {sort: {main: 1}});
+	},
+
+	'theDesserts': function(){
+		var tableId = Session.get('selectedTable');
+		var eventId = Session.get('currentEvent');
+		return Covers.find({table: tableId, event: eventId}, {sort: {dessert: 1}});
 	},
 
 	'getEventName':function() {
@@ -80,10 +128,11 @@ Template.ViewTable.helpers({
 		return SelectedMenuItems.find({createdFromAccount: accountCreator, eventId: currentEvent});
 	},
 
-	'tallyList': function(){
+	'tableTallyList': function(){
 		var currentTable = Session.get('selectedTable');
 		return ItemCounts.find({table: currentTable}, {sort: {order: 1}});
 	},
+
 
 	'theMenus': function(){
 		return Menus.find({itemName: chosenMain, takesTemp: "true"}); 
@@ -173,6 +222,9 @@ Template.ViewTable.onCreated(function () {
 });
 
 Template.ViewTable.onRendered(function () {
+
+	Session.set('sortBy', "coverNumber");
+	console.log("On Rendered the sort is: ", Session.get('sortBy'));
 });
 
 Template.ViewTable.onDestroyed(function () {
