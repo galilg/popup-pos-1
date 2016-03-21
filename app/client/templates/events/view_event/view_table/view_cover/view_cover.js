@@ -541,6 +541,10 @@ Template.ViewCover.onCreated(function () {
 });
 
 Template.ViewCover.onRendered(function () {
+	Session.set('selectedApp', "");
+	Session.set('selectedMain', "");
+	Session.set('selectedDessert', "");
+
 });
 
 Template.ViewCover.onDestroyed(function () {
