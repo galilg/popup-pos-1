@@ -67,13 +67,13 @@ Template.ViewTable.helpers({
 			return Covers.find({table: tableId, event: eventId}, {sort: {coverNumber: 1}});
 		}
 		else if(orderOfSort == "appetizer"){
-			return Covers.find({table: tableId, event: eventId}, {sort: {appetizer: 1}});
+			return Covers.find({table: tableId, event: eventId}, {sort: {appetizer: 1, coverNumber: 1}});
 		}
 		else if(orderOfSort == "main"){
-			return Covers.find({table: tableId, event: eventId}, {sort: {main: 1}});
+			return Covers.find({table: tableId, event: eventId}, {sort: {main: 1, coverNumber: 1}});
 		}
 		else if(orderOfSort == "dessert"){
-			return Covers.find({table: tableId, event: eventId}, {sort: {dessert: 1}});
+			return Covers.find({table: tableId, event: eventId}, {sort: {dessert: 1, coverNumber: 1}});
 		}
 	},
 
