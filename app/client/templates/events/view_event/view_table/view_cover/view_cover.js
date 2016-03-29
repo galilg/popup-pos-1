@@ -3,14 +3,25 @@
 /*****************************************************************************/
 Template.ViewCover.events({
 
+////////////////////////////////////
+// The backToTable/submit button updates the entire count for both the table and the event of 
+// temperatures for any item for which a temperature is required.  In a way it depends on the
+// other events that occur before it that are shown below.
+
 	'click #backToTable': function(){
-		var chosenMain = Session.get('theChosenMainForTemp');//SelectedMenuItems.findOne({_id:this._id}).itemName;
-		if (chosenMain){  // If back to table is selected without chosing a main course chosenMain 
-						  // remains undefined and the following operations fail.	
-			var takesTemp = Menus.findOne({itemName: chosenMain}).takesTemp;  // The chosenMain takes a temp.
-			var currentCover = Session.get('currentCover');
-			var currentEvent = Session.get('currentEvent');
-			var currentTable = Session.get('selectedTable');
+		var mainList = [];
+		var currentEvent = Session.get('currentEvent');
+
+		SelectedMenuItems.find({eventId: currentEvent, course: "Main"}).forEach(function (obj){mainList.push(obj.itemName)});
+
+		for (item in mainList){
+			
+			var chosenMain = mainList[item];
+			if (Menus.findOne({itemName: chosenMain}).takesTemp){				  // If back to table is selected without chosing a main course chosenMain 	
+				var takesTemp = Menus.findOne({itemName: chosenMain}).takesTemp;  // remains undefined and the following operations fail.
+				var currentCover = Session.get('currentCover');					  // The chosenMain takes a temp.
+				var currentEvent = Session.get('currentEvent');
+				var currentTable = Session.get('selectedTable');
 
 				var bnbTally = Covers.find({event: currentEvent, table: currentTable, main: chosenMain, mainTemp:"Black n Blue"}).count();
 				var rareTally = Covers.find({event: currentEvent, table: currentTable, main: chosenMain, mainTemp:"Rare"}).count();
@@ -45,6 +56,7 @@ Template.ViewCover.events({
 					ItemCounts.update({_id: tempsId}, {$set: {well: wellTotal}});
 				}
 		}
+	}
 
 		////////////////////////
 		// Return to the viewTable page.
@@ -140,7 +152,7 @@ Template.ViewCover.events({
 		// This allows for instantaneous updating of total counts each time an item is selected or changed
 		// from one to the next.
 
-		SelectedMenuItems.find({eventId: currentEvent, course: "Main"}).forEach(function (obj){mainList.push(obj.itemName)})
+		SelectedMenuItems.find({eventId: currentEvent, course: "Main"}).forEach(function (obj){mainList.push(obj.itemName)});
 		Covers.update({_id: currentCover}, {$set: {main: chosenMain}});
 
 		/////////////////////////////////
