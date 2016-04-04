@@ -368,7 +368,7 @@ Template.ViewCover.events({
 
 	'change #appMods': function(event){
 		event.preventDefault();
-		var note = $('[name=appNotes').val();
+		var note = $('[name=appNotes]').val();
 		var currentCover = Session.get('currentCover');
 		Covers.update({_id: currentCover}, {$set: {appNotes: note}});
 	},
@@ -382,7 +382,7 @@ Template.ViewCover.events({
 
 	'change #mainMods': function(event){
 		event.preventDefault();
-		var note = $('[name=mainNotes').val();
+		var note = $('[name=mainNotes]').val();
 		var currentCover = Session.get('currentCover');
 		Covers.update({_id: currentCover}, {$set: {mainNotes: note}});
 	},
@@ -397,7 +397,7 @@ Template.ViewCover.events({
 
 	'change #dessertMods': function(event){
 		event.preventDefault();
-		var note = $('[name=dessertNotes').val();
+		var note = $('[name=dessertNotes]').val();
 		var currentCover = Session.get('currentCover');
 		Covers.update({_id: currentCover}, {$set: {dessertNotes: note}})
 	},
