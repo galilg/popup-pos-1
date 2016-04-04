@@ -51,7 +51,7 @@ Template.Adduser.events({
         //console.log(Meteor.user(currentUserId).profile);
         var email = $('[name=email]').val();
         var password = $('[name=password]').val();
-        var confirmPassword = $('[name=confirmPassword').val();
+        var confirmPassword = $('[name=confirmPassword]').val();
         var accountType = $('[name=accountType]').val();
         //var accountName = $('[name=accountName]').val();
         if(Meteor.user(currentUserId).profile.businessName){
@@ -83,7 +83,7 @@ Template.Adduser.events({
         else
             {
                 console.log("Passwords must match.");
-            }   ;
+            }   
         
     }
 });
