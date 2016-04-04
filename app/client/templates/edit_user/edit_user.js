@@ -37,7 +37,7 @@ Template.EditUser.events({
         else
             {
                 console.log("Passwords must match.");
-            }   ;
+            }   
         
     }
 });
