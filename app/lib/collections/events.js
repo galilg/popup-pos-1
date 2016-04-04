@@ -37,7 +37,7 @@ Events.attachSchema(new SimpleSchema({
   },
   date: {
     type: Date,
-    label: "Date Of Event YYYY-MM-DD HH:MM",
+    label: "Date Of Event YYYY-MM-DD",
     autoform: {
           //type: "datetime-local",
           //type: "datetime",
