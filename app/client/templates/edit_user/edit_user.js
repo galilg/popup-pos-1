@@ -10,7 +10,7 @@ Template.EditUser.events({
         var selectedUser = Session.get('selectedUser');
         var email = $('[name=email]').val();
         var password = $('[name=password]').val();
-        var confirmPassword = $('[name=confirmPassword').val();
+        var confirmPassword = $('[name=confirmPassword]').val();
         var accountType = $('[name=accountType]').val();
         //var accountName = $('[name=accountName]').val();
         if(Meteor.user(currentUserId).profile.businessName){
