@@ -84,7 +84,7 @@ Template.ViewCover.events({
 		// This allows for instantaneous updating of total counts each time an item is selected or changed
 		// from one to the next.
 
-		SelectedMenuItems.find({eventId: currentEvent, course: "Appetizer"}).forEach(function (obj){appList.push(obj.itemName)})
+		SelectedMenuItems.find({eventId: currentEvent, course: "Appetizer"}).forEach(function (obj){appList.push(obj.itemName)});
 		Covers.update({_id: currentCover}, {$set: {appetizer: chosenApp}});
 		
 		/////////////////////////////////
