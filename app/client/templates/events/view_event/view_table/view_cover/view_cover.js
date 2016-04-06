@@ -100,9 +100,11 @@ Template.ViewCover.events({
 		// And tally them.
 		if (ItemCounts.findOne({table: currentTable, appetizer: chosenApp})) {
 			for (x in appList){
-				var tableId = ItemCounts.findOne({table: currentTable, appetizer: appList[x]})._id;
-				var tableTally = Covers.find({table: currentTable, appetizer: appList[x]}).count();
-				ItemCounts.update({_id: tableId}, {$set: {tally: tableTally}});
+				if (ItemCounts.findOne({table: currentTable, appetizer: appList[x]})){
+					var tableId = ItemCounts.findOne({table: currentTable, appetizer: appList[x]})._id;
+					var tableTally = Covers.find({table: currentTable, appetizer: appList[x]}).count();
+					ItemCounts.update({_id: tableId}, {$set: {tally: tableTally}});
+				}
 			}
 		}
 		else{ 
@@ -180,10 +182,12 @@ Template.ViewCover.events({
 
 
 		if (ItemCounts.findOne({table: currentTable, main: chosenMain})){
-				for (x in mainList){
+			for (x in mainList){
+				if (ItemCounts.findOne({table: currentTable, main: mainList[x]})){
 					var tableTally = Covers.find({table: currentTable, main: mainList[x]}).count();
 					var tableId = ItemCounts.findOne({table: currentTable, main: mainList[x]})._id;
 					ItemCounts.update({_id: tableId}, {$set: {tally: tableTally}});
+				}
 			}
 		}
 		else{ 
@@ -267,9 +271,11 @@ Template.ViewCover.events({
 
 		if (ItemCounts.findOne({table: currentTable, dessert: chosenDessert})){
 			for (x in dessertList){
-				var tableTally = Covers.find({table: currentTable, dessert: dessertList[x]}).count();
-				var tableId = ItemCounts.findOne({table: currentTable, dessert: dessertList[x]})._id;
-				ItemCounts.update({_id: tableId}, {$set: {tally: tableTally}});
+				if (ItemCounts.findOne({table: currentTable, dessert: dessertList[x]})){
+					var tableTally = Covers.find({table: currentTable, dessert: dessertList[x]}).count();
+					var tableId = ItemCounts.findOne({table: currentTable, dessert: dessertList[x]})._id;
+					ItemCounts.update({_id: tableId}, {$set: {tally: tableTally}});
+				}
 			}
 		}
 		else{ 
