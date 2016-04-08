@@ -3,6 +3,9 @@
   
     <h1>Table: {{getCurrentTable}}</h1>
     <h3>Position: {{getCurrentPosition}}</h3>
+    <p align="left">
+    <button type="button" id="backToTable" class="btn btn-primary">Submit</button>
+  </p>
     <h4><input type="checkbox" id="hasAllergy" value="{{isChecked}}" checked="{{isChecked}}"> Allergy</h4>
     {{#if isChecked}}
     <form class="specifyAllergy">

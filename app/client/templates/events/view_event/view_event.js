@@ -16,6 +16,30 @@ Template.ViewEvent.events({
 			(Session.set('showMenu', "show"));
 	},
 
+	'click #amuseReadyButton': function(){		
+		var selectedEvent = Session.get('currentEvent');		
+		Events.update({_id: selectedEvent}, {$set: {status: "Fire Amuse"}});
+	 },
+
+	 	'click #appsReadyButton': function(){		
+		var selectedEvent = Session.get('currentEvent');
+		Events.update({_id: selectedEvent}, {$set: {status: "Fire Apps"}});
+	 },
+
+	'click #mainsReadyButton': function(){		
+		var selectedEvent = Session.get('currentEvent');
+		Events.update({_id: selectedEvent}, {$set: {status: "Fire Mains"}});
+	 },
+
+	'click #dessertReadyButton': function(){		
+		var selectedEvent = Session.get('currentEvent');		
+		Events.update({_id: selectedEvent}, {$set: {status: "Fire Desserts"}});
+	 },
+	'click #holdButton': function(){		
+		var selectedEvent = Session.get('currentEvent');		
+		Events.update({_id: selectedEvent}, {$set: {status: "HOLD"}});
+	 },
+
 
 });
 
@@ -28,6 +52,14 @@ Template.ViewEvent.helpers({
 		var theEvent = Events.findOne({_id: selectedEvent});
 		return theEvent;
 	},
+
+
+	'eventStatus': function(){
+		var selectedEvent = Session.get('currentEvent');
+		return Events.findOne({_id: selectedEvent}).status;
+		//return Session.get('readyStatus');
+
+	}, 
 
 	tables: function() {
 		//var theUser = Meteor.users.find({_id: this.userId});

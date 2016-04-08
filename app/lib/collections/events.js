@@ -83,6 +83,13 @@ Events.attachSchema(new SimpleSchema({
     }
 
   },
+  status: {
+    type: String,
+    label: "Status",
+    optional: true,
+    defaultValue: "Not Ready"
+    // autoValue:function(){return "Not Ready."}
+  },
 
 }));
 

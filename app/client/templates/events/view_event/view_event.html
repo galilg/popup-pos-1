@@ -1,6 +1,7 @@
 <template name="ViewEvent">
 
 <h4><input type="checkbox" name="seeMenu" id="seeMenuBox" value="{{isChecked}}" checked="{{isChecked}}"> Show Menu</h4>
+<h3>Status: {{eventStatus}}</h3>
 {{#if isChecked}}
   <div><h3>Menu for: {{selectedEvent.name}}</h3>
     <table class="table table-hover">
@@ -56,6 +57,31 @@
   	<button type="button" class="btn btn-primary">Select Menu</button>
   {{/linkTo}}
   {{/if}}
+  <button type="button" class="btn btn-primary" id="amuseReadyButton">
+    Fire Amuse
+   </button>
+ <button type="button" class="btn btn-primary" id="appsReadyButton">
+    Fire Apps
+  </button>
+ <button type="button" class="btn btn-primary" id="mainsReadyButton">
+    Fire Mains
+  </button>
+ <button type="button" class="btn btn-primary" id="dessertReadyButton">
+    Fire Dessert
+    </button>
+ <button type="button" class="btn btn-primary" id="holdButton">
+    HOLD
+    </button>
+
+<!-- <p>
+  <div>
+  <form>
+  Message: 
+      <input type="text" name="message" id="kitcheMessage" size=75>
+  </form>
+  </div>
+</p>
+ -->
 
 
   </div>
