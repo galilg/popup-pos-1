@@ -17,23 +17,31 @@ Template.ViewEvent.events({
 	},
 
 	'click #amuseReadyButton': function(){		
-		var selectedEvent = Session.get('currentEvent');		
-		Events.update({_id: selectedEvent}, {$set: {status: "Fire Amuse"}});
+		var selectedEvent = Session.get('currentEvent');
+		if(confirm('Fire Amuse?')) {
+			Events.update({_id: selectedEvent}, {$set: {status: "Fire Amuse"}});
+		}		
 	 },
 
 	 	'click #appsReadyButton': function(){		
 		var selectedEvent = Session.get('currentEvent');
-		Events.update({_id: selectedEvent}, {$set: {status: "Fire Apps"}});
+		if(confirm('Fire Apps?')) {
+			Events.update({_id: selectedEvent}, {$set: {status: "Fire Apps"}});
+		}
 	 },
 
 	'click #mainsReadyButton': function(){		
 		var selectedEvent = Session.get('currentEvent');
-		Events.update({_id: selectedEvent}, {$set: {status: "Fire Mains"}});
+		if(confirm('Fire Mains?')) {
+			Events.update({_id: selectedEvent}, {$set: {status: "Fire Mains"}});
+		}
 	 },
 
 	'click #dessertReadyButton': function(){		
-		var selectedEvent = Session.get('currentEvent');		
-		Events.update({_id: selectedEvent}, {$set: {status: "Fire Desserts"}});
+		var selectedEvent = Session.get('currentEvent');
+		if(confirm('Fire Desserts?')) {		
+			Events.update({_id: selectedEvent}, {$set: {status: "Fire Desserts"}});
+		}
 	 },
 	'click #holdButton': function(){		
 		var selectedEvent = Session.get('currentEvent');		
