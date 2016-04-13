@@ -6,7 +6,7 @@ AccountsTemplates.configure({
 	onLogoutHook: function(){Router.go('/');},
 
 	onSubmitHook: function(){
-		
+		 
 	},
 
 });
