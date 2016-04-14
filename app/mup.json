@@ -31,8 +31,8 @@
   "appName": "popupPOS",
 
   // Location of app (local directory)
-  "app": "/Users/galil/Git/popUPpos/app/",
-  
+//  "app": "/Users/galil/Git/popUPpos/app/",
+  "app": "/home/galil/Meteor/popup-pos-1/app",
   // Configure environment
   "env": {
     "PORT": 80,
