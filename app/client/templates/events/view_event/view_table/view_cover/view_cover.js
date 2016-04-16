@@ -118,9 +118,11 @@ Template.ViewCover.events({
 
 		if (ItemCounts.findOne({event: currentEvent, appetizer: chosenApp})) {
 				for (x in appList){
-					var eventId = ItemCounts.findOne({event: currentEvent, appetizer: appList[x]})._id;
-					var eventTally = Covers.find({event: currentEvent, appetizer: appList[x]}).count();
-					ItemCounts.update({_id: eventId}, {$set: {tally: eventTally}});
+					if (ItemCounts.findOne({event: currentEvent, appetizer: appList[x]})){
+						var eventId = ItemCounts.findOne({event: currentEvent, appetizer: appList[x]})._id;
+						var eventTally = Covers.find({event: currentEvent, appetizer: appList[x]}).count();
+						ItemCounts.update({_id: eventId}, {$set: {tally: eventTally}});
+					}
 			}
 		}
 		else{
@@ -133,7 +135,7 @@ Template.ViewCover.events({
 		}
 	},
 
-		'click .mainItem': function() {
+	'click .mainItem': function() {
 		Session.set('selectedMain', this._id);
 		var chosenMain = SelectedMenuItems.findOne({_id:this._id}).itemName;
 		Session.set('theChosenMainForTemp', chosenMain);
@@ -218,9 +220,11 @@ Template.ViewCover.events({
 
 		if (ItemCounts.findOne({event: currentEvent, main: chosenMain})){
 			for(x in mainList){
-				var eventTally = Covers.find({event: currentEvent, main: mainList[x]}).count();
-				var eventId = ItemCounts.findOne({event: currentEvent, main: mainList[x]})._id;
-				ItemCounts.update({_id: eventId}, {$set: {tally: eventTally}});
+				if (ItemCounts.findOne({event: currentEvent, main: mainList[x]})){
+					var eventTally = Covers.find({event: currentEvent, main: mainList[x]}).count();
+					var eventId = ItemCounts.findOne({event: currentEvent, main: mainList[x]})._id;
+					ItemCounts.update({_id: eventId}, {$set: {tally: eventTally}});
+				}
 			}
 		}
 
@@ -288,9 +292,11 @@ Template.ViewCover.events({
 		}
 		if (ItemCounts.findOne({event: currentEvent, dessert: chosenDessert})){
 			for (x in dessertList){
-				var eventTally = Covers.find({event: currentEvent, dessert: dessertList[x]}).count();
-				var eventId = ItemCounts.findOne({event: currentEvent, dessert: dessertList[x]})._id;
-				ItemCounts.update({_id: eventId}, {$set: {tally: eventTally}});
+				if (ItemCounts.findOne({event: currentEvent, dessert: dessertList[x]})){
+					var eventTally = Covers.find({event: currentEvent, dessert: dessertList[x]}).count();
+					var eventId = ItemCounts.findOne({event: currentEvent, dessert: dessertList[x]})._id;
+					ItemCounts.update({_id: eventId}, {$set: {tally: eventTally}});
+				}
 			}	
 
 		}
