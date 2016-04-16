@@ -114,6 +114,15 @@ Template.ViewCover.events({
 				tally: 1,
 				order: 1
 			})
+
+			// Repeating the item update from above.  This should be a seperate function.
+			for (x in appList){
+				if (ItemCounts.findOne({table: currentTable, appetizer: appList[x]})){
+					var tableId = ItemCounts.findOne({table: currentTable, appetizer: appList[x]})._id;
+					var tableTally = Covers.find({table: currentTable, appetizer: appList[x]}).count();
+					ItemCounts.update({_id: tableId}, {$set: {tally: tableTally}});
+				}
+			}
 		}
 
 		if (ItemCounts.findOne({event: currentEvent, appetizer: chosenApp})) {
@@ -132,6 +141,14 @@ Template.ViewCover.events({
 				tally: 1,
 				order: 1
 			})
+			//Repeating the item update from above.  This should be a seperate function.
+			for (x in appList){
+					if (ItemCounts.findOne({event: currentEvent, appetizer: appList[x]})){
+						var eventId = ItemCounts.findOne({event: currentEvent, appetizer: appList[x]})._id;
+						var eventTally = Covers.find({event: currentEvent, appetizer: appList[x]}).count();
+						ItemCounts.update({_id: eventId}, {$set: {tally: eventTally}});
+					}
+			}
 		}
 	},
 
@@ -210,6 +227,16 @@ Template.ViewCover.events({
 				well: 0,	
 				modifications: 0,
 			})
+
+			//Repeating the item update from above.  This should be a seperate function.
+
+			for (x in mainList){
+				if (ItemCounts.findOne({table: currentTable, main: mainList[x]})){
+					var tableTally = Covers.find({table: currentTable, main: mainList[x]}).count();
+					var tableId = ItemCounts.findOne({table: currentTable, main: mainList[x]})._id;
+					ItemCounts.update({_id: tableId}, {$set: {tally: tableTally}});
+				}
+			}
 		}
 			
 		//////////////////////////////////
@@ -246,6 +273,14 @@ Template.ViewCover.events({
 				well: 0,	
 				modifications: 0,
 			})
+
+			for(x in mainList){
+				if (ItemCounts.findOne({event: currentEvent, main: mainList[x]})){
+					var eventTally = Covers.find({event: currentEvent, main: mainList[x]}).count();
+					var eventId = ItemCounts.findOne({event: currentEvent, main: mainList[x]})._id;
+					ItemCounts.update({_id: eventId}, {$set: {tally: eventTally}});
+				}
+			}
 		}
 	},
 
@@ -289,6 +324,16 @@ Template.ViewCover.events({
 				tally: 1,
 				order: 3
 			})
+
+			for (x in dessertList){
+				if (ItemCounts.findOne({table: currentTable, dessert: dessertList[x]})){
+					var tableTally = Covers.find({table: currentTable, dessert: dessertList[x]}).count();
+					var tableId = ItemCounts.findOne({table: currentTable, dessert: dessertList[x]})._id;
+					ItemCounts.update({_id: tableId}, {$set: {tally: tableTally}});
+				}
+			}
+
+
 		}
 		if (ItemCounts.findOne({event: currentEvent, dessert: chosenDessert})){
 			for (x in dessertList){
@@ -307,6 +352,14 @@ Template.ViewCover.events({
 				tally: 1,
 				order: 3
 			})
+
+			for (x in dessertList){
+				if (ItemCounts.findOne({event: currentEvent, dessert: dessertList[x]})){
+					var eventTally = Covers.find({event: currentEvent, dessert: dessertList[x]}).count();
+					var eventId = ItemCounts.findOne({event: currentEvent, dessert: dessertList[x]})._id;
+					ItemCounts.update({_id: eventId}, {$set: {tally: eventTally}});
+				}
+			}	
 		}
 	},
 
