@@ -154,7 +154,29 @@ Template.ViewTable.helpers({
 
 	},
 
+	'eventStatus': function(){
+		var selectedEvent = Session.get('currentEvent');
+		return Events.findOne({_id: selectedEvent}).status;
+		//return Session.get('readyStatus');
 
+	},
+
+		'selectedStatus': function(){
+		var selectedEvent = Session.get('currentEvent');
+		var status = Events.findOne({_id: selectedEvent}).status;
+		if (status == "Fire Amuse"){
+			return "amuse";
+		}
+		else if (status == "Fire Apps"){
+			return "apps"
+		}
+		else if (status == "Fire Mains"){
+			return "mains"
+		}
+		else if (status == "Fire Desserts"){
+			return "desserts"
+		}
+	},
 
 
 });

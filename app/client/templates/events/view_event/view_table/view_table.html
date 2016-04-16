@@ -1,13 +1,19 @@
 <template name="ViewTable">
   <div class="view-table">
+    <div>
+      <h1 class="tableClass">TABLE</h1>
+    </div>
   	<div>
   		<button type="button" id="back" class="btn btn-primary">Back to Event</button>
   	</div>
+    <div>
+    <h3 class="{{selectedStatus}}">Status: {{eventStatus}} </h3>
+    </div>
     <h4><input type="checkbox" name="seeMenu" id="seeMenuBox" value="{{isChecked}}" checked="{{isChecked}}"> Show Menu</h4>
     {{#if isChecked}}
     <h1>Event: {{getEventName}}</h1>
     <h1>Table: {{getTableName}}</h1>
-    <h3>Selected Menu</h3>
+    <h3 class="tableClass">Selected Menu for Table</h3>
      <table class="table table-hover">
       <thead>
         <tr>

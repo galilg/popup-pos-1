@@ -1,9 +1,11 @@
 <template name="ViewEvent">
-
+<div class="eventClass">
+<h1> WHOLE EVENT </h1>
+</div>
 <h4><input type="checkbox" name="seeMenu" id="seeMenuBox" value="{{isChecked}}" checked="{{isChecked}}"> Show Menu</h4>
 <h3 class="{{selectedStatus}}">Status: {{eventStatus}} </h3>
 {{#if isChecked}}
-  <div><h3>Menu for: {{selectedEvent.name}}</h3>
+  <div><h3 class="eventClass">Menu for: {{selectedEvent.name}}</h3>
     <table class="table table-hover">
       <thead>
         <tr>
