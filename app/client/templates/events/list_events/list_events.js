@@ -40,7 +40,11 @@ Template.ListEvents.helpers({
 		else{
 			return true;
 		}
-	}
+	},
+
+	'isBeforeToday': function() {
+		return false;
+	},
 
 	
 });

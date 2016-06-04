@@ -8,6 +8,9 @@
    			<button type="update" class="btn btn-primary">Update</button>
    		</div>
    		{{/autoForm}}
-         
+         <p> </p>
+         <div>
+            {{> quickRemoveButton collection="Tables" _id=selectedDoc._id beforeRemove=beforeRemove class="btn btn-danger"}}
+         </div>
    </div>
 </template>

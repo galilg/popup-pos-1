@@ -28,7 +28,7 @@ Events.attachSchema(new SimpleSchema({
   guestCount: {
     type: Number,
     label: "Guest Count",
-    max: 2000
+    max: 200
   },
   courses: {
     type: Number,

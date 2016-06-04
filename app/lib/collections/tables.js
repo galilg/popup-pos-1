@@ -32,11 +32,11 @@ if (Meteor.isServer) {
 }
 
 
-//Tables.attachSchema(new SimpleSchema({
+Tables.attachSchema(new SimpleSchema({
 
-Schema = {};
+// Schema = {};
 
-Schema.tables = new SimpleSchema({
+// Schema.tables = new SimpleSchema({
   tableName: {
     type: String,
     label: "Table Name",
@@ -73,6 +73,6 @@ Schema.tables = new SimpleSchema({
     }*/
   }
 
-})
+}))
 
-Tables.attachSchema(Schema.tables);
+//Tables.attachSchema(Schema.tables);
